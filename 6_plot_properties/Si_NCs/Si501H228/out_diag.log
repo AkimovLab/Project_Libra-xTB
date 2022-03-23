@@ -1,0 +1,1781 @@
+ DBCSR| CPU Multiplication driver                                           XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Use multiplication densification                                       T
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use memory pool for CPU allocation                                     F
+ DBCSR| Number of 3D layers                                               SINGLE
+ DBCSR| Use MPI memory allocation                                              F
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+ DBCSR| MPI: My node id                                                        0
+ DBCSR| MPI: Number of nodes                                                  12
+ DBCSR| OMP: Current number of threads                                         1
+ DBCSR| OMP: Max number of threads                                             1
+ DBCSR| Split modifier for TAS multiplication algorithm                  1.0E+00
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2022-02-03 09:59:47.187
+ ***** ** ***  *** **   PROGRAM STARTED ON        cpn-p27-15.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM STARTED BY                              mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  3517
+  **** **  *******  **  PROGRAM STARTED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228
+
+ CP2K| version string:                                          CP2K version 8.2
+ CP2K| source code revision number:                                  git:310b7ab
+ CP2K| cp2kflags: omp libint fftw3 libxc elpa parallel mpi3 scalapack xsmm max_c
+ CP2K|            ontr=4 no_ipi_driver mkl
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                          Thu Dec 16 02:15:16 EST 2021
+ CP2K| Program compiled on                       srv-p22-12.cbls.ccr.buffalo.edu
+ CP2K| Program compiled for                                  Linux-x86-64-intelx
+ CP2K| Data directory path    /panfs/panfs.cbls.ccr.buffalo.edu/scratch/grp-alex
+ CP2K| Input file name                                          es_diag_temp.inp
+ 
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                           BASIS_SET
+ GLOBAL| Potential file name                                           POTENTIAL
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                          coord.xyz
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                  Si_QD_xtb
+ GLOBAL| Run type                                                         ENERGY
+ GLOBAL| FFT library                                                       FFTW3
+ GLOBAL| Diagonalization library                                            ELPA
+ GLOBAL| Minimum number of eigenvectors for ELPA usage                        16
+ GLOBAL| Orthonormality check for eigenvectors                          DISABLED
+ GLOBAL| Matrix multiplication library                                    SCALAP
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Grid backend                                                       AUTO
+ GLOBAL| Global print level                                                  LOW
+ GLOBAL| MPI I/O enabled                                                       T
+ GLOBAL| Total number of message passing processes                            12
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name                Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz
+ GLOBAL| CPUID                                                              1002
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal            131633832     131633832     131633832     131633832
+ MEMORY| MemFree             109466148     109466148     109466520     109466334
+ MEMORY| Buffers                  2268          2268          2268          2268
+ MEMORY| Cached               18042928      18042928      18042928      18042928
+ MEMORY| Slab                   522856        522856        522856        522856
+ MEMORY| SReclaimable           421104        421104        421104        421104
+ MEMORY| MemLikelyFree       127932448     127932448     127932820     127932634
+
+ 
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+
+                  #####   #####        #          ####### ######   
+                 #     # #     #      #              #    #     #  
+                 #     # #           #    ##   ##    #    #     #  
+                 #     #  #####     #      ## ##     #    ######   
+                 #   # #       #   #        ###      #    #     #  
+                 #    #  #     #  #        ## ##     #    #     #  
+                  #### #  #####  #        ##   ##    #    ######   
+                                                                   
+                                 Version 1.0                       
+                            J. Hutter and A. Hehn                  
+                                                                   
+
+
+ EWALD| Summation is done by:                                               SPME
+ EWALD| Alpha parameter [       ANGSTROM^-1]                              1.8897
+ EWALD| Real Space Cutoff [          ANGSTROM]                            1.7854
+ EWALD| G-space max. Miller index                        243       243       243
+ EWALD| Spline interpolation order                                             6
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        729
+                             - Shell sets:                                  1959
+                             - Shells:                                      1959
+                             - Primitive Cartesian functions:              12666
+                             - Cartesian basis functions:                   5466
+                             - Spherical basis functions:                   4965
+
+  Maximum angular momentum of the orbital basis functions:                     2
+
+
+ SCF PARAMETERS         Density guess:                                   RESTART
+                        --------------------------------------------------------
+                        max_scf:                                              50
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        2.00E-06
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       300    0
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ Number of electrons:                                                       2232
+ Number of occupied orbitals:                                               1116
+ Number of molecular orbitals:                                              1416
+
+ Number of orbital functions:                                               4965
+ Number of independent orbital functions:                                   4965
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 P_Mix/Diag. 0.40E+00    4.7     0.00000021     -1045.8955805124 -1.05E+03
+
+  *** SCF run converged in     1 steps ***
+
+
+  Core Hamiltonian energy:                                  -1051.70867681564368
+  Repulsive potential energy:                                   9.14961012334787
+  Electronic energy:                                           -0.46524050605450
+  DFTB3 3rd order energy:                                       0.00188473898329
+  Dispersion energy:                                           -2.87315805305528
+  Correction for halogen bonding:                               0.00000000000000
+
+  Total energy:                                             -1045.89558051242216
+
+   Calculate PDOS at iteration step                                  0
+
+   Prepare the list of atoms for LDOS.   Number of lists:            2
+          List        1  contains         419 atoms
+          List        2  contains         309 atoms
+
+              ---- PDOS: start iteration on the KS states --- 
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy [a.u.]:            -1045.895580512422157
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops     2 x     2 x   232             11002368       0.0%    100.0%      0.0%
+ flops     2 x     2 x   256             24281088       0.0%    100.0%      0.0%
+ flops     2 x     2 x   224             31868928       0.0%    100.0%      0.0%
+ flops     2 x    32 x     2             51072000       0.0%    100.0%      0.0%
+ flops     9 x     2 x   232            212458176       0.0%    100.0%      0.0%
+ flops     2 x     9 x   232            212491584       0.0%    100.0%      0.0%
+ flops     9 x     2 x   256            468873216       0.0%    100.0%      0.0%
+ flops     2 x     9 x   256            468946944       0.0%    100.0%      0.0%
+ flops     9 x     2 x   224            615396096       0.0%    100.0%      0.0%
+ flops     2 x     9 x   224            615492864       0.0%    100.0%      0.0%
+ flops     9 x    32 x     2           1025740800       0.0%    100.0%      0.0%
+ flops     2 x    32 x     9           1025740800       0.0%    100.0%      0.0%
+ flops     9 x     9 x   232           5123150208       0.0%    100.0%      0.0%
+ flops     9 x     9 x   256          11306262528       0.0%    100.0%      0.0%
+ flops     9 x     9 x   224          14839469568       0.0%    100.0%      0.0%
+ flops     9 x    32 x     9          24641547840       0.0%    100.0%      0.0%
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                        60.673795E+09       0.0%    100.0%      0.0%
+ flops max/rank                      5.199573E+09       0.0%    100.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                            7892405       0.0%    100.0%      0.0%
+ number of processed stacks                  8543       0.0%    100.0%      0.0%
+ average stack size                                     0.0     923.8       0.0
+ marketing flops                   165.064606E+09
+ -------------------------------------------------------------------------------
+ # multiplications                              3
+ max memory usage/rank             801.153024E+06
+ # max total images/rank                        3
+ # max 3D layers                                1
+ # MPI messages exchanged                     288
+ MPI messages size (bytes):
+  total size                         1.196982E+09
+  min size                           1.053440E+06
+  max size                           8.119768E+06
+  average size                       4.156187E+06
+ MPI breakdown and total messages size (bytes):
+             size <=      128                   0                        0
+       128 < size <=     8192                   0                        0
+      8192 < size <=    32768                   0                        0
+     32768 < size <=   131072                   0                        0
+    131072 < size <=  4194304                 108                156973440
+   4194304 < size <= 16777216                 180               1040008440
+  16777216 < size                               0                        0
+ -------------------------------------------------------------------------------
+
+ *** WARNING in dbcsr_mm.F:294 :: Using a non-square number of MPI ranks ***
+ *** might lead to poor performance. Used ranks: 12 Suggested: 9 25      ***
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                      DBCSR MESSAGE PASSING PERFORMANCE                      -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Bcast               17                     12.
+ MP_Allreduce           65                     21.
+ MP_Alltoall            96                2740314.
+ MP_ISend               72                1591007.
+ MP_IRecv               72                1561198.
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                GRID STATISTICS                              -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ LP    KERNEL             BACKEND                              COUNT     PERCENT
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                 862
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Group                2
+ MP_Bcast             1155                 117636.
+ MP_Allreduce         1731                  32913.
+ MP_Sync                 4
+ MP_Alltoall             2               59199680.
+ MP_Wait                38
+ MP_ISend               32                 703303.
+ MP_IRecv               32                 703303.
+ MP_Recv                41                1271040.
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 8.2, the CP2K developers group (2021).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Kuehne,Thomas D.; Iannuzzi,Marcella; Del Ben,Mauro;
+ Rybkin,Vladimir V.; Seewald,Patrick; Stein,Frederick; Laino,Teodoro;
+ Khaliullin,Rustam Z.; Schuett,Ole; Schiffmann,Florian; Golze,Dorothea;
+ Wilhelm,Jan; Chulkov,Sergey; Bani-Hashemian,Mohammad Hossein;
+ Weber,Valery; Borstnik,Urban; Taillefumier,Mathieu;
+ Jakobovits,Alice Shoshana; Lazzaro,Alfio; Pabst,Hans; Mueller,Tiziano;
+ Schade,Robert; Guidon,Manuel; Andermatt,Samuel; Holmberg,Nico;
+ Schenter,Gregory K.; Hehn,Anna; Bussy,Augustin; Belleflamme,Fabian;
+ Tabacchi,Gloria; Gloess,Andreas; Lass,Michael; Bethune,Iain;
+ Mundy,Christopher J.; Plessl,Christian; Watkins,Matt;
+ VandeVondele,Joost; Krack,Matthias; Hutter,Juerg. 
+ The Journal of Chemical Physics, 152 (19), (2020). 
+ CP2K: An electronic structure and molecular dynamics software package -
+ Quickstep: Efficient and accurate electronic structure calculations.
+ https://doi.org/10.1063/5.0007045
+
+ Grimme, S; Bannwarth, C; Shushkov, P. 
+ Journal of Chemical Theory and Computation, 13, 1989 (2017). 
+ A Robust and Accurate Tight-Binding Quantum Chemical Method for
+ Structures, Vibrational Frequencies, and Noncovalent Interactions of
+ Large Molecular Systems Parametrized for All spd-Block Elements (Z = 1-86).
+ https://doi.org/10.1021/acs.jctc.7b00118
+
+ Goerigk, Lars; Hansen, Andreas; Bauer, Christoph; Ehrlich, Stephan;
+ Najibi, Asim; Grimme, Stefan. , 19 (48), (2017). 
+ A look at the density functional theory zoo with the advanced GMTKN55 database
+ for general main group thermochemistry, kinetics and noncovalent interactions.
+ https://doi.org/10.1039/C7CP04913G
+
+ Schuett, Ole; Messmer, Peter; Hutter, Juerg; VandeVondele, Joost. 
+ Electronic Structure Calculations on Graphics Processing Units, John
+ Wiley & Sons, Ltd, 173-190 (2016). 
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for
+ Linear Scaling Density Functional Theory.
+ https://doi.org/10.1002/9781118670712.ch8
+
+ Heinecke, A; Henry, G; Hutchinson, M; Pabst, H. 
+ Proceedings of Intl. Supercomputing Conference, 981-991 (2016). 
+ LIBXSMM: Accelerating Small Matrix Multiplications
+ by Runtime Code Generation.
+ https://doi.org/10.1109/SC.2016.83
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ https://doi.org/10.1016/j.parco.2014.03.012
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WIREs Comput Mol Sci., 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ https://doi.org/10.1002/wcms.1159
+
+ Marek, A; Blum, V; Johanni, R; Havu, V; Lang, B; Auckenthaler, T;
+ Heinecke, A; Bungartz, H; Lederer, H. 
+ Journal of Physics: Condensed Matter, 26 (21), (2014). 
+ The ELPA library: scalable parallel eigenvalue solutions for
+ electronic structure
+ theory and computational science.
+ https://doi.org/10.1088/0953-8984/26/21/213201
+
+ Grimme, S; Ehrlich, S; Goerigk, L. 
+ JOURNAL OF COMPUTATIONAL CHEMISTRY, 32, 1456 (2011). 
+ Effect of the damping function in dispersion corrected density functional theory.
+ https://doi.org/10.1002/jcc.21759
+
+ Grimme, S; Antony, J; Ehrlich, S; Krieg, H. 
+ JOURNAL OF CHEMICAL PHYSICS, 132 (15), 154104 (2010). 
+ A consistent and accurate ab initio parametrization of density
+ functional dispersion correction (DFT-D) for the 94 elements H-Pu.
+ https://doi.org/10.1063/1.3382344
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ https://doi.org/10.1109/JPROC.2004.840301
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.010    0.013   12.826   12.827
+ qs_energies                          1  2.0    0.000    0.000   12.560   12.618
+ cp_fm_diag_elpa                      2  6.5    0.000    0.000    6.523    6.525
+ cp_fm_diag_elpa_base                 2  7.5    6.416    6.425    6.521    6.522
+ scf_post_calculation_tb              1  3.0    0.000    0.000    5.984    6.022
+ calculate_projected_dos              1  4.0    0.548    0.603    5.511    5.569
+ scf_env_do_scf                       1  3.0    0.000    0.000    4.779    5.262
+ scf_env_do_scf_inner_loop            1  4.0    0.000    0.000    4.779    5.261
+ cp_fm_power                          1  5.0    0.055    0.057    4.516    4.521
+ qs_scf_new_mos                       1  5.0    0.000    0.000    4.119    4.127
+ eigensolver                          1  6.0    0.000    0.000    3.746    3.749
+ init_scf_run                         1  3.0    0.000    0.000    1.459    1.467
+ cp_fm_cholesky_restore               3  7.0    1.075    1.081    1.075    1.081
+ scf_env_initial_rho_setup            1  4.0    0.000    0.000    1.000    1.007
+ calculate_first_density_matrix       1  5.0    0.000    0.001    1.000    1.007
+ dbcsr_multiply_generic               3  8.3    0.001    0.001    0.714    0.728
+ mp_sum_dm                         1419  6.0    0.576    0.626    0.576    0.626
+ qs_ks_update_qs_env                  1  5.0    0.000    0.000    0.561    0.572
+ calculate_dm_sparse                  2  6.0    0.001    0.002    0.557    0.572
+ cp_dbcsr_plus_fm_fm_t_native         2  7.0    0.000    0.000    0.545    0.561
+ rebuild_ks_matrix                    1  6.0    0.000    0.000    0.553    0.554
+ build_xtb_ks_matrix                  1  7.0    0.000    0.000    0.553    0.554
+ write_mo_set_to_restart              1  5.0    0.040    0.480    0.079    0.551
+ build_xtb_coulomb                    1  8.0    0.019    0.019    0.548    0.548
+ multiply_cannon                      3  9.3    0.000    0.001    0.529    0.547
+ tb_spme_evaluate                     1  9.0    0.008    0.010    0.524    0.526
+ mulliken_charges_bkp                 1  4.0    0.003    0.003    0.472    0.516
+ multiply_cannon_loop                 3 10.3    0.000    0.000    0.499    0.512
+ cp_fm_syrk                           1  6.0    0.503    0.505    0.503    0.505
+ make_basis_sm                        1  6.0    0.000    0.000    0.477    0.477
+ multiply_cannon_multrec             18 11.3    0.424    0.437    0.425    0.438
+ cp_dbcsr_sm_fm_multiply              1  7.0    0.000    0.000    0.364    0.366
+ dbcsr_complete_redistribute         10  8.1    0.160    0.166    0.350    0.360
+ cp_fm_cholesky_decompose             2  5.5    0.348    0.354    0.348    0.354
+ copy_dbcsr_to_fm                     4  5.8    0.000    0.000    0.338    0.343
+ pw_transfer                          7 10.7    0.001    0.001    0.300    0.306
+ qs_energies_init_hamiltonians        1  3.0    0.000    0.000    0.293    0.293
+ fft_wrap_pw1pw2                      2 11.0    0.000    0.000    0.286    0.293
+ fft_wrap_pw1pw2_60                   2 12.0    0.019    0.020    0.286    0.293
+ cp_gemm                              2  6.0    0.000    0.000    0.282    0.286
+ cp_gemm_fm_gemm                      2  7.0    0.000    0.000    0.282    0.286
+ cp_fm_gemm                           2  8.0    0.282    0.286    0.282    0.286
+ cp_dbcsr_sm_fm_multiply_core         1  8.0    0.000    0.000    0.269    0.272
+ build_xtb_matrices                   1  4.0    0.244    0.254    0.264    0.265
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 1
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2022-02-03 10:00:00.740
+ ***** ** ***  *** **   PROGRAM RAN ON            cpn-p27-15.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM RAN BY                                  mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  3517
+  **** **  *******  **  PROGRAM STOPPED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228
+ DBCSR| CPU Multiplication driver                                           XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Use multiplication densification                                       T
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use memory pool for CPU allocation                                     F
+ DBCSR| Number of 3D layers                                               SINGLE
+ DBCSR| Use MPI memory allocation                                              F
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+ DBCSR| MPI: My node id                                                        0
+ DBCSR| MPI: Number of nodes                                                  12
+ DBCSR| OMP: Current number of threads                                         1
+ DBCSR| OMP: Max number of threads                                             1
+ DBCSR| Split modifier for TAS multiplication algorithm                  1.0E+00
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2022-02-03 16:36:52.574
+ ***** ** ***  *** **   PROGRAM STARTED ON        cpn-p27-16.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM STARTED BY                              mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 19351
+  **** **  *******  **  PROGRAM STARTED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228
+
+ CP2K| version string:                                          CP2K version 8.2
+ CP2K| source code revision number:                                  git:310b7ab
+ CP2K| cp2kflags: omp libint fftw3 libxc elpa parallel mpi3 scalapack xsmm max_c
+ CP2K|            ontr=4 no_ipi_driver mkl
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                          Thu Dec 16 02:15:16 EST 2021
+ CP2K| Program compiled on                       srv-p22-12.cbls.ccr.buffalo.edu
+ CP2K| Program compiled for                                  Linux-x86-64-intelx
+ CP2K| Data directory path    /panfs/panfs.cbls.ccr.buffalo.edu/scratch/grp-alex
+ CP2K| Input file name                                          es_diag_temp.inp
+ 
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                           BASIS_SET
+ GLOBAL| Potential file name                                           POTENTIAL
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                          coord.xyz
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                  Si_QD_xtb
+ GLOBAL| Run type                                                         ENERGY
+ GLOBAL| FFT library                                                       FFTW3
+ GLOBAL| Diagonalization library                                            ELPA
+ GLOBAL| Minimum number of eigenvectors for ELPA usage                        16
+ GLOBAL| Orthonormality check for eigenvectors                          DISABLED
+ GLOBAL| Matrix multiplication library                                    SCALAP
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Grid backend                                                       AUTO
+ GLOBAL| Global print level                                                  LOW
+ GLOBAL| MPI I/O enabled                                                       T
+ GLOBAL| Total number of message passing processes                            12
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name                Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz
+ GLOBAL| CPUID                                                              1002
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal            131633832     131633832     131633832     131633832
+ MEMORY| MemFree             113685312     113685312     113685312     113685312
+ MEMORY| Buffers                  1236          1236          1236          1236
+ MEMORY| Cached               13864256      13864256      13864256      13864256
+ MEMORY| Slab                   474236        474236        474236        474236
+ MEMORY| SReclaimable           387276        387276        387276        387276
+ MEMORY| MemLikelyFree       127938080     127938080     127938080     127938080
+
+ 
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+
+                  #####   #####        #          ####### ######   
+                 #     # #     #      #              #    #     #  
+                 #     # #           #    ##   ##    #    #     #  
+                 #     #  #####     #      ## ##     #    ######   
+                 #   # #       #   #        ###      #    #     #  
+                 #    #  #     #  #        ## ##     #    #     #  
+                  #### #  #####  #        ##   ##    #    ######   
+                                                                   
+                                 Version 1.0                       
+                            J. Hutter and A. Hehn                  
+                                                                   
+
+
+ EWALD| Summation is done by:                                               SPME
+ EWALD| Alpha parameter [       ANGSTROM^-1]                              1.8897
+ EWALD| Real Space Cutoff [          ANGSTROM]                            1.7854
+ EWALD| G-space max. Miller index                        243       243       243
+ EWALD| Spline interpolation order                                             6
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        729
+                             - Shell sets:                                  1959
+                             - Shells:                                      1959
+                             - Primitive Cartesian functions:              12666
+                             - Cartesian basis functions:                   5466
+                             - Spherical basis functions:                   4965
+
+  Maximum angular momentum of the orbital basis functions:                     2
+
+
+ SCF PARAMETERS         Density guess:                                   RESTART
+                        --------------------------------------------------------
+                        max_scf:                                              50
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        2.00E-06
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       300    0
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ Number of electrons:                                                       2232
+ Number of occupied orbitals:                                               1116
+ Number of molecular orbitals:                                              1416
+
+ Number of orbital functions:                                               4965
+ Number of independent orbital functions:                                   4965
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 P_Mix/Diag. 0.40E+00    4.8     0.00000061     -1045.8955805124 -1.05E+03
+
+  *** SCF run converged in     1 steps ***
+
+
+  Core Hamiltonian energy:                                  -1051.70867567802043
+  Repulsive potential energy:                                   9.14961012334787
+  Electronic energy:                                           -0.46524162852811
+  DFTB3 3rd order energy:                                       0.00188472381153
+  Dispersion energy:                                           -2.87315805305528
+  Correction for halogen bonding:                               0.00000000000000
+
+  Total energy:                                             -1045.89558051244421
+
+   Calculate PDOS at iteration step                                  0
+
+   Prepare the list of atoms for LDOS.   Number of lists:            2
+          List        1  contains         419 atoms
+          List        2  contains         309 atoms
+
+              ---- PDOS: start iteration on the KS states --- 
+  
+  Eigenvalues of the occupied subspace spin            1
+ ---------------------------------------------
+      -0.76381251      -0.76263581      -0.76263581      -0.76263581
+      -0.76077166      -0.76077166      -0.76062830      -0.76062830
+      -0.76062830      -0.75897378      -0.75814458      -0.75814458
+      -0.75814458      -0.75791986      -0.75779188      -0.75779188
+      -0.75779188      -0.75562243      -0.75562243      -0.75562243
+      -0.75471549      -0.75471549      -0.75471549      -0.75443482
+      -0.75430752      -0.75430752      -0.75430752      -0.75414852
+      -0.75414852      -0.75144392      -0.75144392      -0.75144392
+      -0.75128720      -0.75128720      -0.75033372      -0.75033372
+      -0.75013467      -0.75013467      -0.75013467      -0.75003008
+      -0.75003008      -0.75003008      -0.74970334      -0.74963480
+      -0.74963480      -0.74963480      -0.74736913      -0.74677681
+      -0.74677681      -0.74677681      -0.74577737      -0.74577737
+      -0.74577737      -0.74532574      -0.74532574      -0.74532574
+      -0.74491364      -0.74491364      -0.74491364      -0.74470130
+      -0.74468436      -0.74468436      -0.74468436      -0.74442912
+      -0.74442912      -0.74355686      -0.74355686      -0.74355686
+      -0.74341357      -0.74149285      -0.74149285      -0.74149285
+      -0.74121913      -0.74121913      -0.74121913      -0.74068386
+      -0.73945866      -0.73945866      -0.73945866      -0.73931402
+      -0.73931402      -0.73928336      -0.73928336      -0.73928336
+      -0.73878421      -0.73878421      -0.73836501      -0.73836501
+      -0.73836501      -0.73812528      -0.73812528      -0.73812528
+      -0.73793777      -0.73723806      -0.73723806      -0.73666692
+      -0.73666692      -0.73666692      -0.73647245      -0.73647245
+      -0.73587038      -0.73587038      -0.73587038      -0.73550060
+      -0.73529155      -0.73444320      -0.73444320      -0.73444320
+      -0.73405255      -0.73405255      -0.73405255      -0.73329376
+      -0.73329376      -0.73329376      -0.73321545      -0.73321545
+      -0.73253656      -0.73253656      -0.73253656      -0.73243137
+      -0.73243137      -0.73243137      -0.73240152      -0.73240152
+      -0.73240152      -0.73075040      -0.73074841      -0.73074841
+      -0.73073339      -0.73073339      -0.73073339      -0.73039461
+      -0.73039461      -0.73039461      -0.72957401      -0.72957401
+      -0.72957401      -0.72835874      -0.72835874      -0.72835874
+      -0.72805721      -0.72805721      -0.72748226      -0.72738049
+      -0.72738049      -0.72738049      -0.72729270      -0.72729270
+      -0.72729270      -0.72711245      -0.72697944      -0.72697944
+      -0.72697944      -0.72686756      -0.72686756      -0.72686756
+      -0.72514498      -0.72511377      -0.72511377      -0.72419709
+      -0.72419709      -0.72419709      -0.72387732      -0.72278496
+      -0.72278496      -0.72278496      -0.72272567      -0.72272567
+      -0.72272567      -0.72206951      -0.72206951      -0.72206951
+      -0.72189522      -0.72189522      -0.72031015      -0.72031015
+      -0.72031015      -0.72007720      -0.72007720      -0.72007720
+      -0.71973341      -0.71973341      -0.71960666      -0.71890674
+      -0.71890674      -0.71890674      -0.71871905      -0.71871905
+      -0.71871905      -0.71684535      -0.71684535      -0.71632073
+      -0.71604306      -0.71604305      -0.71604305      -0.71521658
+      -0.71521658      -0.71521658      -0.71436970      -0.71436970
+      -0.71436970      -0.71409713      -0.71409713      -0.71252236
+      -0.71252236      -0.71244714      -0.71244714      -0.71244714
+      -0.71239587      -0.71225274      -0.71225274      -0.71225274
+      -0.70984625      -0.70984625      -0.70984625      -0.70845045
+      -0.70845045      -0.70845045      -0.70758059      -0.70758059
+      -0.70758059      -0.70706487      -0.70524400      -0.70491114
+      -0.70491114      -0.70491114      -0.70475652      -0.70475652
+      -0.70475652      -0.70391045      -0.70366371      -0.70366371
+      -0.70348154      -0.70348154      -0.70348154      -0.70253540
+      -0.70253540      -0.70253540      -0.69893595      -0.69893595
+      -0.69677689      -0.69677689      -0.69677689      -0.69636418
+      -0.69636418      -0.69636418      -0.68970611      -0.68970611
+      -0.68970611      -0.68945410      -0.68945410      -0.68945410
+      -0.68911624      -0.68911624      -0.68856307      -0.68728709
+      -0.68728709      -0.68728709      -0.68728681      -0.68728681
+      -0.68728681      -0.67993075      -0.67993075      -0.67532857
+      -0.67532857      -0.67532857      -0.67418123      -0.67346282
+      -0.67346282      -0.67211568      -0.67211568      -0.67211568
+      -0.67058004      -0.67052062      -0.67052062      -0.67052062
+      -0.66961414      -0.66961414      -0.66961414      -0.66943219
+      -0.66846403      -0.66846403      -0.66846403      -0.66673818
+      -0.66673818      -0.66673818      -0.66572438      -0.66572438
+      -0.66572438      -0.66331934      -0.66331934      -0.66255215
+      -0.66255215      -0.66255215      -0.66103964      -0.66024883
+      -0.66024883      -0.66024883      -0.65951464      -0.65951464
+      -0.65903326      -0.65903326      -0.65903326      -0.65544352
+      -0.65544352      -0.65544352      -0.65497666      -0.65497666
+      -0.65497666      -0.65487266      -0.65487266      -0.65398100
+      -0.65398100      -0.65398100      -0.65346909      -0.65346909
+      -0.65328795      -0.65238640      -0.65197198      -0.65197198
+      -0.65197198      -0.65102476      -0.65102476      -0.65102476
+      -0.64971373      -0.64971373      -0.64971373      -0.64946543
+      -0.64946543      -0.64946543      -0.64768584      -0.64768584
+      -0.64660529      -0.64660529      -0.64660529      -0.64574622
+      -0.64571323      -0.64561542      -0.64561542      -0.64561542
+      -0.64521480      -0.64521480      -0.64521480      -0.64459571
+      -0.64459571      -0.64459571      -0.64411952      -0.64411952
+      -0.64204276      -0.64204276      -0.64204276      -0.64004136
+      -0.64004136      -0.64004136      -0.63933649      -0.63933649
+      -0.63933649      -0.63796516      -0.63796516      -0.63796516
+      -0.63743679      -0.63743679      -0.63743679      -0.63703684
+      -0.63703684      -0.63676872      -0.63676872      -0.63676872
+      -0.63668820      -0.63649051      -0.63476285      -0.63476285
+      -0.63431924      -0.63431924      -0.63431924      -0.63321415
+      -0.63321415      -0.63321415      -0.63286517      -0.63096861
+      -0.63096861      -0.63063259      -0.63063259      -0.63063259
+      -0.62958246      -0.62958246      -0.62958246      -0.62926122
+      -0.62926122      -0.62926122      -0.62802328      -0.62802328
+      -0.62802328      -0.62779117      -0.62721138      -0.62721138
+      -0.62721138      -0.62694408      -0.62694408      -0.62512885
+      -0.62418783      -0.62418783      -0.62418783      -0.62305172
+      -0.62305172      -0.62305172      -0.62263255      -0.62263255
+      -0.62072942      -0.62072942      -0.62072942      -0.62029667
+      -0.61899946      -0.61899946      -0.61899946      -0.61860027
+      -0.61860027      -0.61839741      -0.61839741      -0.61839741
+      -0.61650199      -0.61650199      -0.61650199      -0.61517987
+      -0.61517987      -0.61517987      -0.61404728      -0.61404728
+      -0.61404728      -0.61269611      -0.61269611      -0.61006547
+      -0.61006547      -0.61006547      -0.60941507      -0.60806706
+      -0.60457974      -0.60457974      -0.60457974      -0.60447291
+      -0.60447291      -0.60447291      -0.60403636      -0.60184295
+      -0.60184295      -0.60184295      -0.60178798      -0.60065257
+      -0.60065257      -0.60065257      -0.60060969      -0.60060969
+      -0.59659711      -0.59659711      -0.59659711      -0.59164910
+      -0.59054322      -0.59054322      -0.59012864      -0.59012864
+      -0.59012864      -0.58695896      -0.58695896      -0.58695896
+      -0.58433535      -0.58433535      -0.58433535      -0.58332650
+      -0.58332650      -0.58332650      -0.57993011      -0.57993011
+      -0.57386362      -0.57386362      -0.57386362      -0.56819635
+      -0.56819635      -0.56819635      -0.56780723      -0.56755807
+      -0.56755807      -0.56681058      -0.56681058      -0.56681058
+      -0.56385500      -0.56385500      -0.56385500      -0.56376776
+      -0.56376776      -0.56376776      -0.56356611      -0.56303914
+      -0.56303914      -0.56303914      -0.56071669      -0.56071669
+      -0.55587795      -0.55482855      -0.55478905      -0.55478905
+      -0.55478905      -0.55475042      -0.55475042      -0.55345729
+      -0.55345729      -0.55345729      -0.55166708      -0.55166708
+      -0.55166708      -0.55153918      -0.55153918      -0.55153918
+      -0.55041020      -0.55041020      -0.55041020      -0.55040505
+      -0.55040505      -0.55040505      -0.55013843      -0.55013843
+      -0.55003589      -0.55003589      -0.55003589      -0.54981039
+      -0.54722765      -0.54722765      -0.54722765      -0.54592966
+      -0.54564958      -0.54564958      -0.54564958      -0.54547157
+      -0.54547157      -0.54547157      -0.54498179      -0.54498179
+      -0.54494132      -0.54494132      -0.54494132      -0.54475659
+      -0.54475659      -0.54475659      -0.54474875      -0.54474875
+      -0.54443393      -0.54396180      -0.54396180      -0.54322016
+      -0.54322016      -0.54322016      -0.54319985      -0.54319985
+      -0.54319985      -0.54300626      -0.54296654      -0.54296654
+      -0.54296654      -0.54269344      -0.54269344      -0.54269344
+      -0.54262039      -0.54262039      -0.54245763      -0.54245763
+      -0.54245763      -0.54234321      -0.54234321      -0.54234321
+      -0.54193658      -0.54193658      -0.54193658      -0.54159722
+      -0.54159722      -0.54159722      -0.54045046      -0.54045046
+      -0.54045046      -0.54039052      -0.54039052      -0.54039052
+      -0.54006997      -0.53966184      -0.53966171      -0.53966171
+      -0.53966171      -0.53900822      -0.53900822      -0.53900822
+      -0.53893702      -0.53893702      -0.53816975      -0.53816975
+      -0.53816975      -0.53731909      -0.53731909      -0.53731909
+      -0.53712843      -0.53712843      -0.53685284      -0.53685284
+      -0.53685284      -0.53639357      -0.53622804      -0.53622804
+      -0.53622804      -0.53621768      -0.53589858      -0.53589858
+      -0.53589858      -0.53575504      -0.53575504      -0.53530562
+      -0.53454810      -0.53454810      -0.53454810      -0.53453763
+      -0.53453763      -0.53453763      -0.53451594      -0.53451594
+      -0.53384315      -0.53384315      -0.53384315      -0.53329147
+      -0.53329147      -0.53329147      -0.53267514      -0.53257899
+      -0.53257899      -0.53257899      -0.53195731      -0.53147818
+      -0.53147818      -0.53147818      -0.53104218      -0.53104218
+      -0.53069650      -0.53069650      -0.53069650      -0.53022804
+      -0.53022804      -0.53002781      -0.53002781      -0.53002781
+      -0.52920113      -0.52920113      -0.52920113      -0.52875637
+      -0.52856477      -0.52856477      -0.52853799      -0.52853799
+      -0.52853799      -0.52711953      -0.52711953      -0.52711953
+      -0.52672761      -0.52672761      -0.52672761      -0.52647979
+      -0.52612084      -0.52612084      -0.52612084      -0.52576184
+      -0.52576184      -0.52576184      -0.52451854      -0.52451854
+      -0.52414401      -0.52414401      -0.52414401      -0.52404966
+      -0.52404966      -0.52404966      -0.52333204      -0.52324799
+      -0.52324799      -0.52324799      -0.52300310      -0.52300310
+      -0.52111964      -0.52111964      -0.52106212      -0.52106212
+      -0.52106212      -0.52099074      -0.52089676      -0.52089676
+      -0.52089676      -0.51978368      -0.51978368      -0.51907820
+      -0.51907820      -0.51907820      -0.51880425      -0.51880425
+      -0.51880425      -0.51812365      -0.51812365      -0.51812365
+      -0.51799151      -0.51799151      -0.51799151      -0.51779451
+      -0.51665539      -0.51665539      -0.51665539      -0.51654536
+      -0.51654536      -0.51654536      -0.51575859      -0.51575859
+      -0.51532434      -0.51532434      -0.51532434      -0.51509974
+      -0.51509974      -0.51509974      -0.51450614      -0.51450614
+      -0.51450614      -0.51436763      -0.51436763      -0.51387505
+      -0.51363556      -0.51344757      -0.51344757      -0.51344757
+      -0.51298826      -0.51298826      -0.51267454      -0.51267454
+      -0.51267454      -0.51247367      -0.51247367      -0.51247367
+      -0.51188790      -0.51188790      -0.51188790      -0.51188559
+      -0.51188559      -0.51188559      -0.51186261      -0.51126434
+      -0.51126434      -0.51073844      -0.51073844      -0.51073844
+      -0.51007565      -0.51007565      -0.50993757      -0.50993757
+      -0.50993757      -0.50961434      -0.50961434      -0.50961434
+      -0.50944430      -0.50944430      -0.50944430      -0.50944059
+      -0.50944059      -0.50900316      -0.50871528      -0.50871528
+      -0.50871528      -0.50827149      -0.50827149      -0.50827149
+      -0.50800134      -0.50800134      -0.50800134      -0.50785347
+      -0.50767786      -0.50767786      -0.50754534      -0.50754534
+      -0.50754534      -0.50718942      -0.50718942      -0.50718942
+      -0.50664446      -0.50664446      -0.50664446      -0.50659536
+      -0.50659536      -0.50654599      -0.50654599      -0.50654599
+      -0.50589219      -0.50589219      -0.50589219      -0.50511485
+      -0.50511485      -0.50511485      -0.50418816      -0.50401095
+      -0.50401095      -0.50401095      -0.50373291      -0.50373291
+      -0.50373291      -0.50342572      -0.50342572      -0.50342572
+      -0.50316486      -0.50316486      -0.50278188      -0.50278188
+      -0.50278188      -0.50244125      -0.50244125      -0.50244125
+      -0.50232187      -0.50205474      -0.50205474      -0.50205474
+      -0.50196922      -0.50123532      -0.50123532      -0.50123532
+      -0.50093135      -0.50093135      -0.50058156      -0.50058156
+      -0.50058156      -0.50045166      -0.50045166      -0.50045166
+      -0.49987742      -0.49987742      -0.49985376      -0.49985376
+      -0.49985376      -0.49949101      -0.49905890      -0.49878458
+      -0.49878458      -0.49836816      -0.49836816      -0.49836816
+      -0.49830468      -0.49830468      -0.49830468      -0.49803452
+      -0.49782050      -0.49782050      -0.49782050      -0.49778440
+      -0.49778440      -0.49778440      -0.49701621      -0.49701621
+      -0.49701621      -0.49697902      -0.49697902      -0.49662538
+      -0.49662538      -0.49662538      -0.49654069      -0.49654069
+      -0.49654069      -0.49627299      -0.49619269      -0.49619269
+      -0.49619269      -0.49584570      -0.49510707      -0.49510707
+      -0.49510707      -0.49489670      -0.49489670      -0.49483045
+      -0.49483045      -0.49483045      -0.49478914      -0.49478914
+      -0.49478914      -0.49453598      -0.49453598      -0.49453598
+      -0.49420147      -0.49420147      -0.49403278      -0.49348166
+      -0.49321791      -0.49292008      -0.49292008      -0.49280085
+      -0.49280085      -0.49280085      -0.49273707      -0.49273707
+      -0.49273707      -0.49119580      -0.49119580      -0.49119580
+      -0.49107292      -0.49100141      -0.49100141      -0.49100141
+      -0.49060276      -0.49060276      -0.49060276      -0.49002589
+      -0.49002589      -0.49001570      -0.49001570      -0.49001570
+      -0.48993271      -0.48993271      -0.48993271      -0.48965861
+      -0.48965861      -0.48965861      -0.48898043      -0.48898043
+      -0.48898043      -0.48890824      -0.48889675      -0.48889675
+      -0.48889675      -0.48823936      -0.48823936      -0.48823936
+      -0.48808502      -0.48808502      -0.48808502      -0.48800926
+      -0.48800926      -0.48792392      -0.48750788      -0.48750788
+      -0.48750788      -0.48691967      -0.48691967      -0.48676784
+      -0.48676784      -0.48676784      -0.48672117      -0.48672117
+      -0.48672117      -0.48587425      -0.48587425      -0.48587425
+      -0.48576691      -0.48576691      -0.48576691      -0.48530055
+      -0.48520888      -0.48520888      -0.48520888      -0.48498705
+      -0.48498705      -0.48467010      -0.48467010      -0.48467010
+      -0.48440555      -0.48440555      -0.48440555      -0.48396199
+      -0.48368146      -0.48368146      -0.48307964      -0.48307964
+      -0.48307964      -0.48257250      -0.48257250      -0.48214283
+      -0.48203992      -0.48203992      -0.48203992      -0.48197667
+      -0.48197667      -0.48197667      -0.48175431      -0.48175431
+      -0.48175431      -0.48154835      -0.48099187      -0.48079536
+      -0.48079536      -0.48079536      -0.48027050      -0.48027050
+      -0.48022022      -0.48022022      -0.48022022      -0.47987943
+      -0.47939270      -0.47939270      -0.47939270      -0.47934389
+      -0.47934389      -0.47913917      -0.47913917      -0.47913917
+      -0.47893917      -0.47893917      -0.47893917      -0.47852500
+      -0.47852500      -0.47827770      -0.47827770      -0.47827770
+      -0.47812654      -0.47812654      -0.47812654      -0.47805280
+      -0.47790699      -0.47790699      -0.47790699      -0.47676116
+      -0.47676116      -0.47676116      -0.47656878      -0.47656878
+      -0.47656878      -0.47644610      -0.47644610      -0.47644610
+      -0.47638311      -0.47636659      -0.47636659      -0.47566138
+      -0.47566138      -0.47566138      -0.47534781      -0.47534781
+      -0.47534781      -0.47438516      -0.47438516      -0.47438516
+      -0.47430390      -0.47430390      -0.47430390      -0.47424368
+      -0.47424368      -0.47386271      -0.47341358      -0.47341358
+      -0.47341358      -0.47291350      -0.47291350      -0.47291350
+      -0.47290093      -0.47290093      -0.47248450      -0.47248450
+      -0.47248450      -0.47157604      -0.47157604      -0.47126800
+      -0.47126800      -0.47126800      -0.47115286      -0.47112448
+      -0.47112448      -0.47112448      -0.47104740      -0.47104740
+      -0.47104740      -0.47029310      -0.47029310      -0.47029310
+      -0.46962610      -0.46962610      -0.46962610      -0.46857755
+      -0.46857755      -0.46857755      -0.46738366      -0.46716898
+      -0.46716898      -0.46716898      -0.46701520      -0.46701520
+      -0.46701520      -0.46510433      -0.46510433      -0.46478314
+      -0.46470871      -0.46470871      -0.46409167      -0.46409167
+      -0.46409167      -0.46331714      -0.46331714      -0.46283436
+      -0.46283436      -0.46283436      -0.46108665      -0.46108665
+      -0.46053684      -0.46053684      -0.46053684      -0.45990754
+      -0.45990754      -0.45990754      -0.45847322      -0.45847322
+      -0.45847322      -0.45843507      -0.45843507      -0.45843507
+      -0.45574883      -0.45574883      -0.45404593      -0.45404593
+      -0.45404593      -0.45396343      -0.45396343      -0.45396343
+      -0.45373145      -0.45190377      -0.45190377      -0.45190377
+ Fermi Energy [eV] :  -12.296927
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy [a.u.]:            -1045.895580512444212
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops     2 x     2 x   232             11002368       0.0%    100.0%      0.0%
+ flops     2 x     2 x   256             24281088       0.0%    100.0%      0.0%
+ flops     2 x     2 x   224             31868928       0.0%    100.0%      0.0%
+ flops     2 x    32 x     2             51072000       0.0%    100.0%      0.0%
+ flops     9 x     2 x   232            212458176       0.0%    100.0%      0.0%
+ flops     2 x     9 x   232            212491584       0.0%    100.0%      0.0%
+ flops     9 x     2 x   256            468873216       0.0%    100.0%      0.0%
+ flops     2 x     9 x   256            468946944       0.0%    100.0%      0.0%
+ flops     9 x     2 x   224            615396096       0.0%    100.0%      0.0%
+ flops     2 x     9 x   224            615492864       0.0%    100.0%      0.0%
+ flops     9 x    32 x     2           1025740800       0.0%    100.0%      0.0%
+ flops     2 x    32 x     9           1025740800       0.0%    100.0%      0.0%
+ flops     9 x     9 x   232           5123150208       0.0%    100.0%      0.0%
+ flops     9 x     9 x   256          11306262528       0.0%    100.0%      0.0%
+ flops     9 x     9 x   224          14839469568       0.0%    100.0%      0.0%
+ flops     9 x    32 x     9          24641547840       0.0%    100.0%      0.0%
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                        60.673795E+09       0.0%    100.0%      0.0%
+ flops max/rank                      5.199573E+09       0.0%    100.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                            7892405       0.0%    100.0%      0.0%
+ number of processed stacks                  8543       0.0%    100.0%      0.0%
+ average stack size                                     0.0     923.8       0.0
+ marketing flops                   165.064606E+09
+ -------------------------------------------------------------------------------
+ # multiplications                              3
+ max memory usage/rank             805.433344E+06
+ # max total images/rank                        3
+ # max 3D layers                                1
+ # MPI messages exchanged                     288
+ MPI messages size (bytes):
+  total size                         1.196982E+09
+  min size                           1.053440E+06
+  max size                           8.119768E+06
+  average size                       4.156187E+06
+ MPI breakdown and total messages size (bytes):
+             size <=      128                   0                        0
+       128 < size <=     8192                   0                        0
+      8192 < size <=    32768                   0                        0
+     32768 < size <=   131072                   0                        0
+    131072 < size <=  4194304                 108                156973440
+   4194304 < size <= 16777216                 180               1040008440
+  16777216 < size                               0                        0
+ -------------------------------------------------------------------------------
+
+ *** WARNING in dbcsr_mm.F:294 :: Using a non-square number of MPI ranks ***
+ *** might lead to poor performance. Used ranks: 12 Suggested: 9 25      ***
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                      DBCSR MESSAGE PASSING PERFORMANCE                      -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Bcast               17                     12.
+ MP_Allreduce           65                     21.
+ MP_Alltoall            96                2740314.
+ MP_ISend               72                1591007.
+ MP_IRecv               72                1561198.
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                GRID STATISTICS                              -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ LP    KERNEL             BACKEND                              COUNT     PERCENT
+ 0     collocate ortho    REF                                  37188      50.76%
+ 1     collocate ortho    REF                                  18036      24.62%
+ 2     collocate ortho    REF                                  18036      24.62%
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                 931
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Group                3
+ MP_Bcast             1461                 101154.
+ MP_Allreduce         1741                  32733.
+ MP_Sync                 5
+ MP_Alltoall            14                8670382.
+ MP_ISendRecv           66                  31104.
+ MP_Wait               104
+ MP_ISend               32                 703303.
+ MP_IRecv               32                 703303.
+ MP_Recv                41                1271040.
+ MP_Write_All            6                  51192.
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 8.2, the CP2K developers group (2021).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Kuehne,Thomas D.; Iannuzzi,Marcella; Del Ben,Mauro;
+ Rybkin,Vladimir V.; Seewald,Patrick; Stein,Frederick; Laino,Teodoro;
+ Khaliullin,Rustam Z.; Schuett,Ole; Schiffmann,Florian; Golze,Dorothea;
+ Wilhelm,Jan; Chulkov,Sergey; Bani-Hashemian,Mohammad Hossein;
+ Weber,Valery; Borstnik,Urban; Taillefumier,Mathieu;
+ Jakobovits,Alice Shoshana; Lazzaro,Alfio; Pabst,Hans; Mueller,Tiziano;
+ Schade,Robert; Guidon,Manuel; Andermatt,Samuel; Holmberg,Nico;
+ Schenter,Gregory K.; Hehn,Anna; Bussy,Augustin; Belleflamme,Fabian;
+ Tabacchi,Gloria; Gloess,Andreas; Lass,Michael; Bethune,Iain;
+ Mundy,Christopher J.; Plessl,Christian; Watkins,Matt;
+ VandeVondele,Joost; Krack,Matthias; Hutter,Juerg. 
+ The Journal of Chemical Physics, 152 (19), (2020). 
+ CP2K: An electronic structure and molecular dynamics software package -
+ Quickstep: Efficient and accurate electronic structure calculations.
+ https://doi.org/10.1063/5.0007045
+
+ Grimme, S; Bannwarth, C; Shushkov, P. 
+ Journal of Chemical Theory and Computation, 13, 1989 (2017). 
+ A Robust and Accurate Tight-Binding Quantum Chemical Method for
+ Structures, Vibrational Frequencies, and Noncovalent Interactions of
+ Large Molecular Systems Parametrized for All spd-Block Elements (Z = 1-86).
+ https://doi.org/10.1021/acs.jctc.7b00118
+
+ Goerigk, Lars; Hansen, Andreas; Bauer, Christoph; Ehrlich, Stephan;
+ Najibi, Asim; Grimme, Stefan. , 19 (48), (2017). 
+ A look at the density functional theory zoo with the advanced GMTKN55 database
+ for general main group thermochemistry, kinetics and noncovalent interactions.
+ https://doi.org/10.1039/C7CP04913G
+
+ Schuett, Ole; Messmer, Peter; Hutter, Juerg; VandeVondele, Joost. 
+ Electronic Structure Calculations on Graphics Processing Units, John
+ Wiley & Sons, Ltd, 173-190 (2016). 
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for
+ Linear Scaling Density Functional Theory.
+ https://doi.org/10.1002/9781118670712.ch8
+
+ Heinecke, A; Henry, G; Hutchinson, M; Pabst, H. 
+ Proceedings of Intl. Supercomputing Conference, 981-991 (2016). 
+ LIBXSMM: Accelerating Small Matrix Multiplications
+ by Runtime Code Generation.
+ https://doi.org/10.1109/SC.2016.83
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ https://doi.org/10.1016/j.parco.2014.03.012
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WIREs Comput Mol Sci., 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ https://doi.org/10.1002/wcms.1159
+
+ Marek, A; Blum, V; Johanni, R; Havu, V; Lang, B; Auckenthaler, T;
+ Heinecke, A; Bungartz, H; Lederer, H. 
+ Journal of Physics: Condensed Matter, 26 (21), (2014). 
+ The ELPA library: scalable parallel eigenvalue solutions for
+ electronic structure
+ theory and computational science.
+ https://doi.org/10.1088/0953-8984/26/21/213201
+
+ Grimme, S; Ehrlich, S; Goerigk, L. 
+ JOURNAL OF COMPUTATIONAL CHEMISTRY, 32, 1456 (2011). 
+ Effect of the damping function in dispersion corrected density functional theory.
+ https://doi.org/10.1002/jcc.21759
+
+ Grimme, S; Antony, J; Ehrlich, S; Krieg, H. 
+ JOURNAL OF CHEMICAL PHYSICS, 132 (15), 154104 (2010). 
+ A consistent and accurate ab initio parametrization of density
+ functional dispersion correction (DFT-D) for the 94 elements H-Pu.
+ https://doi.org/10.1063/1.3382344
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ https://doi.org/10.1109/JPROC.2004.840301
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.080    0.090   34.199   34.199
+ qs_energies                          1  2.0    0.000    0.000   33.663   33.665
+ scf_post_calculation_tb              1  3.0    0.142    0.166   26.652   26.697
+ pw_to_cube                           6  4.0    1.625   19.262   19.404   19.436
+ mp_bcast_l                           6  5.0   17.641   19.245   17.641   19.245
+ cp_fm_diag_elpa                      2  6.5    0.000    0.000    6.521    6.523
+ cp_fm_diag_elpa_base                 2  7.5    6.415    6.425    6.519    6.520
+ calculate_projected_dos              1  4.0    0.546    0.628    5.463    5.546
+ scf_env_do_scf                       1  3.0    0.000    0.000    4.905    5.388
+ scf_env_do_scf_inner_loop            1  4.0    0.000    0.000    4.905    5.388
+ cp_fm_power                          1  5.0    0.055    0.055    4.487    4.493
+ qs_scf_new_mos                       1  5.0    0.000    0.000    4.192    4.199
+ eigensolver                          1  6.0    0.000    0.000    3.823    3.825
+ init_scf_run                         1  3.0    0.000    0.000    1.780    1.788
+ scf_env_initial_rho_setup            1  4.0    0.000    0.000    1.290    1.297
+ calculate_first_density_matrix       1  5.0    0.000    0.001    1.290    1.297
+ cp_fm_cholesky_restore               3  7.0    1.129    1.136    1.129    1.136
+ generate_qs_task_list                1  4.0    0.646    0.810    0.826    0.949
+ dbcsr_multiply_generic               3  8.3    0.001    0.001    0.715    0.732
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 1
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2022-02-03 16:37:27.727
+ ***** ** ***  *** **   PROGRAM RAN ON            cpn-p27-16.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM RAN BY                                  mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 19351
+  **** **  *******  **  PROGRAM STOPPED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228
+ DBCSR| CPU Multiplication driver                                           XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Use multiplication densification                                       T
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use memory pool for CPU allocation                                     F
+ DBCSR| Number of 3D layers                                               SINGLE
+ DBCSR| Use MPI memory allocation                                              F
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+ DBCSR| MPI: My node id                                                        0
+ DBCSR| MPI: Number of nodes                                                  12
+ DBCSR| OMP: Current number of threads                                         1
+ DBCSR| OMP: Max number of threads                                             1
+ DBCSR| Split modifier for TAS multiplication algorithm                  1.0E+00
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2022-02-03 17:17:58.171
+ ***** ** ***  *** **   PROGRAM STARTED ON        cpn-p27-15.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM STARTED BY                              mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 15999
+  **** **  *******  **  PROGRAM STARTED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228
+
+ CP2K| version string:                                          CP2K version 8.2
+ CP2K| source code revision number:                                  git:310b7ab
+ CP2K| cp2kflags: omp libint fftw3 libxc elpa parallel mpi3 scalapack xsmm max_c
+ CP2K|            ontr=4 no_ipi_driver mkl
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                          Thu Dec 16 02:15:16 EST 2021
+ CP2K| Program compiled on                       srv-p22-12.cbls.ccr.buffalo.edu
+ CP2K| Program compiled for                                  Linux-x86-64-intelx
+ CP2K| Data directory path    /panfs/panfs.cbls.ccr.buffalo.edu/scratch/grp-alex
+ CP2K| Input file name                                          es_diag_temp.inp
+ 
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                           BASIS_SET
+ GLOBAL| Potential file name                                           POTENTIAL
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                          coord.xyz
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                  Si_QD_xtb
+ GLOBAL| Run type                                                         ENERGY
+ GLOBAL| FFT library                                                       FFTW3
+ GLOBAL| Diagonalization library                                            ELPA
+ GLOBAL| Minimum number of eigenvectors for ELPA usage                        16
+ GLOBAL| Orthonormality check for eigenvectors                          DISABLED
+ GLOBAL| Matrix multiplication library                                    SCALAP
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Grid backend                                                       AUTO
+ GLOBAL| Global print level                                                  LOW
+ GLOBAL| MPI I/O enabled                                                       T
+ GLOBAL| Total number of message passing processes                            12
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name                Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz
+ GLOBAL| CPUID                                                              1002
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal            131633832     131633832     131633832     131633832
+ MEMORY| MemFree             107286036     107286036     107286036     107286036
+ MEMORY| Buffers                  2268          2268          2268          2268
+ MEMORY| Cached               20218408      20218408      20218408      20218408
+ MEMORY| Slab                   524740        524740        524740        524740
+ MEMORY| SReclaimable           423092        423092        423092        423092
+ MEMORY| MemLikelyFree       127929804     127929804     127929804     127929804
+
+ 
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+
+                  #####   #####        #          ####### ######   
+                 #     # #     #      #              #    #     #  
+                 #     # #           #    ##   ##    #    #     #  
+                 #     #  #####     #      ## ##     #    ######   
+                 #   # #       #   #        ###      #    #     #  
+                 #    #  #     #  #        ## ##     #    #     #  
+                  #### #  #####  #        ##   ##    #    ######   
+                                                                   
+                                 Version 1.0                       
+                            J. Hutter and A. Hehn                  
+                                                                   
+
+
+ EWALD| Summation is done by:                                               SPME
+ EWALD| Alpha parameter [       ANGSTROM^-1]                              1.8897
+ EWALD| Real Space Cutoff [          ANGSTROM]                            1.7854
+ EWALD| G-space max. Miller index                        243       243       243
+ EWALD| Spline interpolation order                                             6
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        729
+                             - Shell sets:                                  1959
+                             - Shells:                                      1959
+                             - Primitive Cartesian functions:              12666
+                             - Cartesian basis functions:                   5466
+                             - Spherical basis functions:                   4965
+
+  Maximum angular momentum of the orbital basis functions:                     2
+
+
+ SCF PARAMETERS         Density guess:                                   RESTART
+                        --------------------------------------------------------
+                        max_scf:                                              50
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        2.00E-06
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       300    0
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ Number of electrons:                                                       2232
+ Number of occupied orbitals:                                               1116
+ Number of molecular orbitals:                                              1416
+
+ Number of orbital functions:                                               4965
+ Number of independent orbital functions:                                   4965
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 P_Mix/Diag. 0.40E+00    4.9     0.00000308     -1045.8955805123 -1.05E+03
+     2 P_Mix/Diag. 0.40E+00    5.8     0.00000497     -1045.8955805116  7.12E-10
+     3 DIIS/Diag.  0.40E-05    6.1     0.00000233     -1045.8955805078  3.73E-09
+     4 DIIS/Diag.  0.29E-05    5.8     0.00000341     -1045.8955805115 -3.69E-09
+     5 DIIS/Diag.  0.91E-06    5.9     0.00000038     -1045.8955805124 -8.50E-10
+
+  *** SCF run converged in     5 steps ***
+
+
+  Core Hamiltonian energy:                                  -1051.70867509045797
+  Repulsive potential energy:                                   9.14961012334787
+  Electronic energy:                                           -0.46524221177976
+  DFTB3 3rd order energy:                                       0.00188471958027
+  Dispersion energy:                                           -2.87315805305528
+  Correction for halogen bonding:                               0.00000000000000
+
+  Total energy:                                             -1045.89558051236486
+
+   Calculate PDOS at iteration step                                  0
+
+   Prepare the list of atoms for LDOS.   Number of lists:            2
+          List        1  contains         419 atoms
+          List        2  contains         309 atoms
+
+              ---- PDOS: start iteration on the KS states --- 
+  
+  Eigenvalues of the occupied subspace spin            1
+ ---------------------------------------------
+      -0.76381239      -0.76263568      -0.76263568      -0.76263568
+      -0.76077165      -0.76077165      -0.76062813      -0.76062813
+      -0.76062813      -0.75897378      -0.75814455      -0.75814455
+      -0.75814455      -0.75791974      -0.75779176      -0.75779176
+      -0.75779176      -0.75562236      -0.75562236      -0.75562236
+      -0.75471545      -0.75471545      -0.75471545      -0.75443479
+      -0.75430741      -0.75430741      -0.75430741      -0.75414844
+      -0.75414844      -0.75144380      -0.75144380      -0.75144380
+      -0.75128717      -0.75128717      -0.75033363      -0.75033363
+      -0.75013462      -0.75013462      -0.75013462      -0.75003005
+      -0.75003005      -0.75003005      -0.74970332      -0.74963470
+      -0.74963470      -0.74963470      -0.74736904      -0.74677675
+      -0.74677675      -0.74677675      -0.74577730      -0.74577730
+      -0.74577730      -0.74532563      -0.74532563      -0.74532563
+      -0.74491362      -0.74491362      -0.74491362      -0.74470128
+      -0.74468427      -0.74468427      -0.74468427      -0.74442911
+      -0.74442911      -0.74355684      -0.74355684      -0.74355684
+      -0.74341345      -0.74149275      -0.74149275      -0.74149275
+      -0.74121906      -0.74121906      -0.74121906      -0.74068381
+      -0.73945860      -0.73945860      -0.73945860      -0.73931395
+      -0.73931395      -0.73928329      -0.73928329      -0.73928329
+      -0.73878414      -0.73878414      -0.73836498      -0.73836498
+      -0.73836498      -0.73812524      -0.73812524      -0.73812524
+      -0.73793765      -0.73723798      -0.73723798      -0.73666684
+      -0.73666684      -0.73666684      -0.73647248      -0.73647248
+      -0.73587029      -0.73587029      -0.73587029      -0.73550039
+      -0.73529164      -0.73444318      -0.73444318      -0.73444318
+      -0.73405252      -0.73405252      -0.73405252      -0.73329366
+      -0.73329366      -0.73329366      -0.73321535      -0.73321535
+      -0.73253644      -0.73253644      -0.73253644      -0.73243124
+      -0.73243124      -0.73243124      -0.73240142      -0.73240142
+      -0.73240142      -0.73075044      -0.73074839      -0.73074839
+      -0.73073328      -0.73073328      -0.73073328      -0.73039459
+      -0.73039459      -0.73039459      -0.72957396      -0.72957396
+      -0.72957396      -0.72835869      -0.72835869      -0.72835869
+      -0.72805715      -0.72805715      -0.72748226      -0.72738043
+      -0.72738043      -0.72738043      -0.72729272      -0.72729272
+      -0.72729272      -0.72711239      -0.72697937      -0.72697937
+      -0.72697937      -0.72686753      -0.72686753      -0.72686753
+      -0.72514484      -0.72511367      -0.72511367      -0.72419695
+      -0.72419695      -0.72419695      -0.72387718      -0.72278491
+      -0.72278491      -0.72278491      -0.72272566      -0.72272566
+      -0.72272566      -0.72206946      -0.72206946      -0.72206946
+      -0.72189511      -0.72189511      -0.72031012      -0.72031012
+      -0.72031012      -0.72007712      -0.72007712      -0.72007712
+      -0.71973335      -0.71973335      -0.71960660      -0.71890666
+      -0.71890666      -0.71890666      -0.71871899      -0.71871899
+      -0.71871899      -0.71684538      -0.71684538      -0.71632077
+      -0.71604297      -0.71604297      -0.71604297      -0.71521647
+      -0.71521647      -0.71521647      -0.71436966      -0.71436966
+      -0.71436966      -0.71409713      -0.71409713      -0.71252231
+      -0.71252231      -0.71244705      -0.71244705      -0.71244705
+      -0.71239584      -0.71225269      -0.71225269      -0.71225269
+      -0.70984614      -0.70984614      -0.70984614      -0.70845042
+      -0.70845042      -0.70845042      -0.70758051      -0.70758051
+      -0.70758051      -0.70706478      -0.70524397      -0.70491105
+      -0.70491105      -0.70491105      -0.70475647      -0.70475647
+      -0.70475647      -0.70391035      -0.70366358      -0.70366358
+      -0.70348158      -0.70348158      -0.70348158      -0.70253535
+      -0.70253535      -0.70253535      -0.69893587      -0.69893587
+      -0.69677690      -0.69677690      -0.69677690      -0.69636420
+      -0.69636420      -0.69636420      -0.68970599      -0.68970599
+      -0.68970599      -0.68945408      -0.68945408      -0.68945408
+      -0.68911626      -0.68911626      -0.68856314      -0.68728703
+      -0.68728703      -0.68728703      -0.68728675      -0.68728675
+      -0.68728675      -0.67993073      -0.67993073      -0.67532857
+      -0.67532857      -0.67532857      -0.67418124      -0.67346272
+      -0.67346272      -0.67211569      -0.67211569      -0.67211569
+      -0.67058001      -0.67052055      -0.67052055      -0.67052055
+      -0.66961409      -0.66961409      -0.66961409      -0.66943207
+      -0.66846397      -0.66846397      -0.66846397      -0.66673811
+      -0.66673811      -0.66673811      -0.66572432      -0.66572432
+      -0.66572432      -0.66331934      -0.66331934      -0.66255211
+      -0.66255211      -0.66255211      -0.66103957      -0.66024878
+      -0.66024878      -0.66024878      -0.65951463      -0.65951463
+      -0.65903323      -0.65903323      -0.65903323      -0.65544349
+      -0.65544349      -0.65544349      -0.65497662      -0.65497662
+      -0.65497662      -0.65487262      -0.65487262      -0.65398096
+      -0.65398096      -0.65398096      -0.65346907      -0.65346907
+      -0.65328785      -0.65238648      -0.65197194      -0.65197194
+      -0.65197194      -0.65102468      -0.65102468      -0.65102468
+      -0.64971368      -0.64971368      -0.64971368      -0.64946537
+      -0.64946537      -0.64946537      -0.64768575      -0.64768575
+      -0.64660523      -0.64660523      -0.64660523      -0.64574622
+      -0.64571314      -0.64561536      -0.64561536      -0.64561536
+      -0.64521473      -0.64521473      -0.64521473      -0.64459562
+      -0.64459562      -0.64459562      -0.64411945      -0.64411945
+      -0.64204275      -0.64204275      -0.64204275      -0.64004132
+      -0.64004132      -0.64004131      -0.63933641      -0.63933641
+      -0.63933641      -0.63796512      -0.63796512      -0.63796512
+      -0.63743673      -0.63743673      -0.63743673      -0.63703675
+      -0.63703675      -0.63676874      -0.63676874      -0.63676874
+      -0.63668807      -0.63649037      -0.63476278      -0.63476278
+      -0.63431913      -0.63431913      -0.63431913      -0.63321412
+      -0.63321412      -0.63321412      -0.63286512      -0.63096858
+      -0.63096858      -0.63063250      -0.63063250      -0.63063250
+      -0.62958240      -0.62958240      -0.62958240      -0.62926110
+      -0.62926110      -0.62926110      -0.62802319      -0.62802319
+      -0.62802319      -0.62779114      -0.62721129      -0.62721129
+      -0.62721129      -0.62694400      -0.62694400      -0.62512882
+      -0.62418777      -0.62418777      -0.62418777      -0.62305167
+      -0.62305167      -0.62305167      -0.62263248      -0.62263248
+      -0.62072932      -0.62072932      -0.62072932      -0.62029656
+      -0.61899936      -0.61899936      -0.61899936      -0.61860021
+      -0.61860021      -0.61839730      -0.61839730      -0.61839730
+      -0.61650192      -0.61650192      -0.61650192      -0.61517984
+      -0.61517984      -0.61517984      -0.61404722      -0.61404722
+      -0.61404722      -0.61269607      -0.61269607      -0.61006542
+      -0.61006542      -0.61006542      -0.60941502      -0.60806702
+      -0.60457967      -0.60457967      -0.60457967      -0.60447284
+      -0.60447284      -0.60447284      -0.60403629      -0.60184285
+      -0.60184285      -0.60184285      -0.60178792      -0.60065249
+      -0.60065249      -0.60065249      -0.60060966      -0.60060966
+      -0.59659707      -0.59659707      -0.59659707      -0.59164903
+      -0.59054313      -0.59054313      -0.59012857      -0.59012857
+      -0.59012857      -0.58695888      -0.58695888      -0.58695888
+      -0.58433528      -0.58433528      -0.58433528      -0.58332645
+      -0.58332645      -0.58332645      -0.57993004      -0.57993004
+      -0.57386354      -0.57386354      -0.57386354      -0.56819628
+      -0.56819628      -0.56819628      -0.56780722      -0.56755808
+      -0.56755808      -0.56681051      -0.56681051      -0.56681051
+      -0.56385512      -0.56385512      -0.56385512      -0.56376789
+      -0.56376789      -0.56376789      -0.56356611      -0.56303925
+      -0.56303925      -0.56303925      -0.56071675      -0.56071675
+      -0.55587793      -0.55482861      -0.55478912      -0.55478912
+      -0.55478912      -0.55475049      -0.55475049      -0.55345720
+      -0.55345720      -0.55345720      -0.55166714      -0.55166714
+      -0.55166714      -0.55153924      -0.55153924      -0.55153924
+      -0.55041016      -0.55041016      -0.55041016      -0.55040502
+      -0.55040502      -0.55040502      -0.55013839      -0.55013839
+      -0.55003584      -0.55003584      -0.55003584      -0.54981034
+      -0.54722761      -0.54722761      -0.54722761      -0.54592962
+      -0.54564952      -0.54564952      -0.54564952      -0.54547154
+      -0.54547154      -0.54547154      -0.54498176      -0.54498176
+      -0.54494127      -0.54494127      -0.54494127      -0.54475659
+      -0.54475659      -0.54475659      -0.54474873      -0.54474873
+      -0.54443394      -0.54396176      -0.54396176      -0.54322009
+      -0.54322009      -0.54322009      -0.54319987      -0.54319987
+      -0.54319987      -0.54300621      -0.54296645      -0.54296645
+      -0.54296645      -0.54269345      -0.54269345      -0.54269345
+      -0.54262028      -0.54262028      -0.54245762      -0.54245762
+      -0.54245762      -0.54234317      -0.54234317      -0.54234317
+      -0.54193653      -0.54193653      -0.54193653      -0.54159728
+      -0.54159728      -0.54159728      -0.54045048      -0.54045048
+      -0.54045048      -0.54039047      -0.54039047      -0.54039047
+      -0.54006992      -0.53966185      -0.53966170      -0.53966170
+      -0.53966170      -0.53900824      -0.53900824      -0.53900824
+      -0.53893700      -0.53893700      -0.53816975      -0.53816975
+      -0.53816975      -0.53731913      -0.53731913      -0.53731913
+      -0.53712851      -0.53712851      -0.53685284      -0.53685284
+      -0.53685284      -0.53639355      -0.53622813      -0.53622813
+      -0.53622813      -0.53621779      -0.53589856      -0.53589856
+      -0.53589856      -0.53575510      -0.53575510      -0.53530558
+      -0.53454810      -0.53454810      -0.53454810      -0.53453758
+      -0.53453757      -0.53453757      -0.53451592      -0.53451592
+      -0.53384311      -0.53384311      -0.53384311      -0.53329142
+      -0.53329142      -0.53329142      -0.53267505      -0.53257895
+      -0.53257895      -0.53257895      -0.53195721      -0.53147814
+      -0.53147814      -0.53147814      -0.53104211      -0.53104211
+      -0.53069650      -0.53069650      -0.53069650      -0.53022804
+      -0.53022804      -0.53002779      -0.53002779      -0.53002779
+      -0.52920109      -0.52920109      -0.52920109      -0.52875631
+      -0.52856477      -0.52856477      -0.52853798      -0.52853798
+      -0.52853798      -0.52711951      -0.52711951      -0.52711951
+      -0.52672759      -0.52672759      -0.52672759      -0.52647979
+      -0.52612071      -0.52612071      -0.52612071      -0.52576173
+      -0.52576173      -0.52576172      -0.52451849      -0.52451849
+      -0.52414391      -0.52414391      -0.52414391      -0.52404956
+      -0.52404956      -0.52404956      -0.52333189      -0.52324791
+      -0.52324791      -0.52324791      -0.52300298      -0.52300298
+      -0.52111953      -0.52111953      -0.52106202      -0.52106202
+      -0.52106202      -0.52099068      -0.52089668      -0.52089668
+      -0.52089668      -0.51978354      -0.51978354      -0.51907816
+      -0.51907816      -0.51907816      -0.51880418      -0.51880418
+      -0.51880418      -0.51812362      -0.51812362      -0.51812362
+      -0.51799143      -0.51799143      -0.51799143      -0.51779454
+      -0.51665531      -0.51665531      -0.51665531      -0.51654526
+      -0.51654526      -0.51654526      -0.51575850      -0.51575850
+      -0.51532430      -0.51532430      -0.51532430      -0.51509969
+      -0.51509969      -0.51509969      -0.51450608      -0.51450608
+      -0.51450608      -0.51436754      -0.51436754      -0.51387497
+      -0.51363547      -0.51344750      -0.51344750      -0.51344750
+      -0.51298822      -0.51298822      -0.51267443      -0.51267443
+      -0.51267443      -0.51247359      -0.51247359      -0.51247359
+      -0.51188784      -0.51188784      -0.51188784      -0.51188551
+      -0.51188551      -0.51188551      -0.51186248      -0.51126423
+      -0.51126423      -0.51073836      -0.51073836      -0.51073836
+      -0.51007558      -0.51007558      -0.50993750      -0.50993750
+      -0.50993750      -0.50961424      -0.50961424      -0.50961424
+      -0.50944421      -0.50944421      -0.50944421      -0.50944052
+      -0.50944052      -0.50900313      -0.50871522      -0.50871522
+      -0.50871522      -0.50827145      -0.50827145      -0.50827145
+      -0.50800128      -0.50800128      -0.50800128      -0.50785339
+      -0.50767777      -0.50767777      -0.50754526      -0.50754526
+      -0.50754526      -0.50718932      -0.50718932      -0.50718932
+      -0.50664438      -0.50664438      -0.50664438      -0.50659528
+      -0.50659528      -0.50654591      -0.50654591      -0.50654591
+      -0.50589214      -0.50589214      -0.50589214      -0.50511478
+      -0.50511478      -0.50511478      -0.50418809      -0.50401090
+      -0.50401090      -0.50401090      -0.50373286      -0.50373286
+      -0.50373286      -0.50342563      -0.50342563      -0.50342563
+      -0.50316486      -0.50316486      -0.50278183      -0.50278183
+      -0.50278183      -0.50244116      -0.50244116      -0.50244116
+      -0.50232186      -0.50205472      -0.50205472      -0.50205472
+      -0.50196917      -0.50123525      -0.50123525      -0.50123525
+      -0.50093127      -0.50093127      -0.50058148      -0.50058148
+      -0.50058148      -0.50045159      -0.50045159      -0.50045159
+      -0.49987735      -0.49987735      -0.49985370      -0.49985370
+      -0.49985370      -0.49949094      -0.49905878      -0.49878454
+      -0.49878454      -0.49836809      -0.49836809      -0.49836809
+      -0.49830465      -0.49830465      -0.49830465      -0.49803448
+      -0.49782043      -0.49782043      -0.49782043      -0.49778433
+      -0.49778433      -0.49778433      -0.49701614      -0.49701614
+      -0.49701614      -0.49697902      -0.49697902      -0.49662527
+      -0.49662527      -0.49662527      -0.49654061      -0.49654061
+      -0.49654061      -0.49627290      -0.49619265      -0.49619265
+      -0.49619265      -0.49584565      -0.49510704      -0.49510704
+      -0.49510704      -0.49489664      -0.49489664      -0.49483039
+      -0.49483039      -0.49483039      -0.49478908      -0.49478908
+      -0.49478908      -0.49453595      -0.49453595      -0.49453595
+      -0.49420142      -0.49420142      -0.49403265      -0.49348160
+      -0.49321780      -0.49292002      -0.49292002      -0.49280082
+      -0.49280082      -0.49280082      -0.49273704      -0.49273704
+      -0.49273704      -0.49119573      -0.49119573      -0.49119573
+      -0.49107288      -0.49100139      -0.49100139      -0.49100139
+      -0.49060270      -0.49060270      -0.49060270      -0.49002582
+      -0.49002582      -0.49001563      -0.49001563      -0.49001563
+      -0.48993267      -0.48993267      -0.48993267      -0.48965853
+      -0.48965853      -0.48965853      -0.48898042      -0.48898042
+      -0.48898042      -0.48890818      -0.48889670      -0.48889670
+      -0.48889670      -0.48823930      -0.48823930      -0.48823930
+      -0.48808497      -0.48808497      -0.48808497      -0.48800920
+      -0.48800920      -0.48792382      -0.48750780      -0.48750780
+      -0.48750780      -0.48691959      -0.48691959      -0.48676777
+      -0.48676777      -0.48676777      -0.48672111      -0.48672111
+      -0.48672111      -0.48587423      -0.48587423      -0.48587423
+      -0.48576688      -0.48576688      -0.48576688      -0.48530047
+      -0.48520883      -0.48520883      -0.48520882      -0.48498700
+      -0.48498700      -0.48467005      -0.48467005      -0.48467005
+      -0.48440548      -0.48440548      -0.48440548      -0.48396194
+      -0.48368142      -0.48368142      -0.48307961      -0.48307961
+      -0.48307961      -0.48257242      -0.48257242      -0.48214275
+      -0.48203986      -0.48203986      -0.48203986      -0.48197664
+      -0.48197664      -0.48197664      -0.48175426      -0.48175426
+      -0.48175426      -0.48154832      -0.48099189      -0.48079531
+      -0.48079531      -0.48079531      -0.48027044      -0.48027044
+      -0.48022015      -0.48022015      -0.48022015      -0.47987939
+      -0.47939264      -0.47939264      -0.47939264      -0.47934383
+      -0.47934383      -0.47913914      -0.47913914      -0.47913914
+      -0.47893913      -0.47893913      -0.47893913      -0.47852492
+      -0.47852492      -0.47827764      -0.47827764      -0.47827764
+      -0.47812650      -0.47812650      -0.47812650      -0.47805275
+      -0.47790695      -0.47790695      -0.47790695      -0.47676108
+      -0.47676108      -0.47676108      -0.47656872      -0.47656872
+      -0.47656872      -0.47644605      -0.47644605      -0.47644604
+      -0.47638301      -0.47636654      -0.47636654      -0.47566133
+      -0.47566133      -0.47566133      -0.47534779      -0.47534779
+      -0.47534779      -0.47438508      -0.47438508      -0.47438508
+      -0.47430385      -0.47430385      -0.47430385      -0.47424364
+      -0.47424364      -0.47386271      -0.47341354      -0.47341354
+      -0.47341354      -0.47291346      -0.47291346      -0.47291346
+      -0.47290089      -0.47290089      -0.47248443      -0.47248443
+      -0.47248443      -0.47157599      -0.47157599      -0.47126797
+      -0.47126797      -0.47126797      -0.47115285      -0.47112445
+      -0.47112445      -0.47112445      -0.47104735      -0.47104735
+      -0.47104735      -0.47029303      -0.47029303      -0.47029303
+      -0.46962608      -0.46962608      -0.46962608      -0.46857753
+      -0.46857753      -0.46857753      -0.46738360      -0.46716893
+      -0.46716893      -0.46716893      -0.46701513      -0.46701513
+      -0.46701513      -0.46510428      -0.46510428      -0.46478311
+      -0.46470867      -0.46470867      -0.46409164      -0.46409164
+      -0.46409164      -0.46331708      -0.46331708      -0.46283431
+      -0.46283431      -0.46283431      -0.46108660      -0.46108660
+      -0.46053681      -0.46053681      -0.46053681      -0.45990747
+      -0.45990747      -0.45990747      -0.45847321      -0.45847321
+      -0.45847321      -0.45843502      -0.45843502      -0.45843502
+      -0.45574877      -0.45574877      -0.45404588      -0.45404588
+      -0.45404588      -0.45396339      -0.45396339      -0.45396339
+      -0.45373142      -0.45190375      -0.45190375      -0.45190375
+ Fermi Energy [eV] :  -12.296926
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy [a.u.]:            -1045.895580512364859
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops     2 x     2 x   232             33007104       0.0%    100.0%      0.0%
+ flops     2 x    32 x     2             51072000       0.0%    100.0%      0.0%
+ flops     2 x     2 x   256             72843264       0.0%    100.0%      0.0%
+ flops     2 x     2 x   224             95606784       0.0%    100.0%      0.0%
+ flops     9 x     2 x   232            637374528       0.0%    100.0%      0.0%
+ flops     2 x     9 x   232            637474752       0.0%    100.0%      0.0%
+ flops     9 x    32 x     2           1025740800       0.0%    100.0%      0.0%
+ flops     2 x    32 x     9           1025740800       0.0%    100.0%      0.0%
+ flops     9 x     2 x   256           1406619648       0.0%    100.0%      0.0%
+ flops     2 x     9 x   256           1406840832       0.0%    100.0%      0.0%
+ flops     9 x     2 x   224           1846188288       0.0%    100.0%      0.0%
+ flops     2 x     9 x   224           1846478592       0.0%    100.0%      0.0%
+ flops     9 x     9 x   232          15369450624       0.0%    100.0%      0.0%
+ flops     9 x    32 x     9          24641547840       0.0%    100.0%      0.0%
+ flops     9 x     9 x   256          33918787584       0.0%    100.0%      0.0%
+ flops     9 x     9 x   224          44518408704       0.0%    100.0%      0.0%
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                       128.533182E+09       0.0%    100.0%      0.0%
+ flops max/rank                     11.007847E+09       0.0%    100.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                           10209845       0.0%    100.0%      0.0%
+ number of processed stacks                 11711       0.0%    100.0%      0.0%
+ average stack size                                     0.0     871.8       0.0
+ marketing flops                   385.150747E+09
+ -------------------------------------------------------------------------------
+ # multiplications                              7
+ max memory usage/rank               1.101672E+09
+ # max total images/rank                        3
+ # max 3D layers                                1
+ # MPI messages exchanged                     672
+ MPI messages size (bytes):
+  total size                         2.546826E+09
+  min size                           1.053440E+06
+  max size                           8.119768E+06
+  average size                       3.789920E+06
+ MPI breakdown and total messages size (bytes):
+             size <=      128                   0                        0
+       128 < size <=     8192                   0                        0
+      8192 < size <=    32768                   0                        0
+     32768 < size <=   131072                   0                        0
+    131072 < size <=  4194304                 252                381947520
+   4194304 < size <= 16777216                 420               2164878840
+  16777216 < size                               0                        0
+ -------------------------------------------------------------------------------
+
+ *** WARNING in dbcsr_mm.F:294 :: Using a non-square number of MPI ranks ***
+ *** might lead to poor performance. Used ranks: 12 Suggested: 9 25      ***
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                      DBCSR MESSAGE PASSING PERFORMANCE                      -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Bcast               17                     12.
+ MP_Allreduce           89                     17.
+ MP_Alltoall           256                2896338.
+ MP_ISend              168                1449666.
+ MP_IRecv              168                1406806.
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                GRID STATISTICS                              -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ LP    KERNEL             BACKEND                              COUNT     PERCENT
+ 0     collocate ortho    REF                                  39924      52.53%
+ 1     collocate ortho    REF                                  18036      23.73%
+ 2     collocate ortho    REF                                  18036      23.73%
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                1507
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Group                3
+ MP_Bcast             1469                 100603.
+ MP_Allreduce         1779                  33010.
+ MP_Sync                 9
+ MP_Alltoall            22               68394612.
+ MP_ISendRecv           66                9920232.
+ MP_Wait               256
+ MP_ISend              160                 703303.
+ MP_IRecv              160                 703303.
+ MP_Recv                41                1271040.
+ MP_Write_All            6                1960540.
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 8.2, the CP2K developers group (2021).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Kuehne,Thomas D.; Iannuzzi,Marcella; Del Ben,Mauro;
+ Rybkin,Vladimir V.; Seewald,Patrick; Stein,Frederick; Laino,Teodoro;
+ Khaliullin,Rustam Z.; Schuett,Ole; Schiffmann,Florian; Golze,Dorothea;
+ Wilhelm,Jan; Chulkov,Sergey; Bani-Hashemian,Mohammad Hossein;
+ Weber,Valery; Borstnik,Urban; Taillefumier,Mathieu;
+ Jakobovits,Alice Shoshana; Lazzaro,Alfio; Pabst,Hans; Mueller,Tiziano;
+ Schade,Robert; Guidon,Manuel; Andermatt,Samuel; Holmberg,Nico;
+ Schenter,Gregory K.; Hehn,Anna; Bussy,Augustin; Belleflamme,Fabian;
+ Tabacchi,Gloria; Gloess,Andreas; Lass,Michael; Bethune,Iain;
+ Mundy,Christopher J.; Plessl,Christian; Watkins,Matt;
+ VandeVondele,Joost; Krack,Matthias; Hutter,Juerg. 
+ The Journal of Chemical Physics, 152 (19), (2020). 
+ CP2K: An electronic structure and molecular dynamics software package -
+ Quickstep: Efficient and accurate electronic structure calculations.
+ https://doi.org/10.1063/5.0007045
+
+ Grimme, S; Bannwarth, C; Shushkov, P. 
+ Journal of Chemical Theory and Computation, 13, 1989 (2017). 
+ A Robust and Accurate Tight-Binding Quantum Chemical Method for
+ Structures, Vibrational Frequencies, and Noncovalent Interactions of
+ Large Molecular Systems Parametrized for All spd-Block Elements (Z = 1-86).
+ https://doi.org/10.1021/acs.jctc.7b00118
+
+ Goerigk, Lars; Hansen, Andreas; Bauer, Christoph; Ehrlich, Stephan;
+ Najibi, Asim; Grimme, Stefan. , 19 (48), (2017). 
+ A look at the density functional theory zoo with the advanced GMTKN55 database
+ for general main group thermochemistry, kinetics and noncovalent interactions.
+ https://doi.org/10.1039/C7CP04913G
+
+ Schuett, Ole; Messmer, Peter; Hutter, Juerg; VandeVondele, Joost. 
+ Electronic Structure Calculations on Graphics Processing Units, John
+ Wiley & Sons, Ltd, 173-190 (2016). 
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for
+ Linear Scaling Density Functional Theory.
+ https://doi.org/10.1002/9781118670712.ch8
+
+ Heinecke, A; Henry, G; Hutchinson, M; Pabst, H. 
+ Proceedings of Intl. Supercomputing Conference, 981-991 (2016). 
+ LIBXSMM: Accelerating Small Matrix Multiplications
+ by Runtime Code Generation.
+ https://doi.org/10.1109/SC.2016.83
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ https://doi.org/10.1016/j.parco.2014.03.012
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WIREs Comput Mol Sci., 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ https://doi.org/10.1002/wcms.1159
+
+ Marek, A; Blum, V; Johanni, R; Havu, V; Lang, B; Auckenthaler, T;
+ Heinecke, A; Bungartz, H; Lederer, H. 
+ Journal of Physics: Condensed Matter, 26 (21), (2014). 
+ The ELPA library: scalable parallel eigenvalue solutions for
+ electronic structure
+ theory and computational science.
+ https://doi.org/10.1088/0953-8984/26/21/213201
+
+ Grimme, S; Ehrlich, S; Goerigk, L. 
+ JOURNAL OF COMPUTATIONAL CHEMISTRY, 32, 1456 (2011). 
+ Effect of the damping function in dispersion corrected density functional theory.
+ https://doi.org/10.1002/jcc.21759
+
+ Grimme, S; Antony, J; Ehrlich, S; Krieg, H. 
+ JOURNAL OF CHEMICAL PHYSICS, 132 (15), 154104 (2010). 
+ A consistent and accurate ab initio parametrization of density
+ functional dispersion correction (DFT-D) for the 94 elements H-Pu.
+ https://doi.org/10.1063/1.3382344
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ https://doi.org/10.1109/JPROC.2004.840301
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.012    0.019   75.529   75.530
+ qs_energies                          1  2.0    0.000    0.000   75.007   75.007
+ scf_post_calculation_tb              1  3.0    0.684    0.897   44.248   44.292
+ scf_env_do_scf                       1  3.0    0.000    0.000   28.710   29.193
+ scf_env_do_scf_inner_loop            5  4.0    0.000    0.000   28.710   29.192
+ qs_scf_new_mos                       5  5.0    0.001    0.001   25.868   25.915
+ pw_to_cube                           6  4.0    2.760   23.948   24.974   25.289
+ mp_bcast_l                           6  5.0   21.258   23.191   21.258   23.191
+ eigensolver                          5  6.0    0.000    0.001   19.073   19.077
+ cp_fm_diag_elpa                      6  6.8    0.000    0.000   17.388   17.393
+ cp_fm_diag_elpa_base                 6  7.8   17.071   17.104   17.382   17.386
+ calculate_wavefunction               6  4.0    3.383    6.353   11.523   11.560
+ rs_pw_transfer                      16  8.1    0.000    0.000    4.345    7.310
+ rs_pw_transfer_RS2PW_50              6  6.0    0.605    0.641    3.870    6.855
+ mp_waitall_1                       432 11.5    3.447    6.428    3.447    6.428
+ calculate_projected_dos              1  4.0    0.546    0.608    5.409    5.472
+ cp_fm_cholesky_restore              15  7.0    5.260    5.290    5.260    5.290
+ qs_diis_b_step                       4  6.0    0.000    0.001    4.925    4.932
+ cp_fm_power                          1  5.0    0.055    0.057    4.430    4.437
+ pw_transfer                         47  9.3    0.004    0.005    3.457    3.509
+ fft_wrap_pw1pw2                     22  8.3    0.000    0.000    3.400    3.449
+ fft3d_ps                            22 10.3    1.893    2.058    2.819    2.872
+ rs_grid_zero                        21  9.0    2.729    2.870    2.729    2.870
+ qs_ks_update_qs_env                  5  5.0    0.000    0.000    2.621    2.630
+ rebuild_ks_matrix                    5  6.0    0.000    0.000    2.604    2.605
+ build_xtb_ks_matrix                  5  7.0    0.001    0.002    2.604    2.605
+ build_xtb_coulomb                    5  8.0    0.093    0.096    2.578    2.578
+ tb_spme_evaluate                     5  9.0    0.042    0.046    2.462    2.468
+ cp_fm_symm                           8  7.0    2.434    2.458    2.434    2.458
+ cp_gemm                             10  6.8    0.000    0.000    2.076    2.098
+ cp_gemm_fm_gemm                     10  7.8    0.000    0.000    2.076    2.098
+ cp_fm_gemm                          10  8.8    2.075    2.098    2.075    2.098
+ fft_wrap_pw1pw2_50                  12  7.0    0.114    0.139    2.005    2.042
+ calculate_dm_sparse                  6  6.0    0.004    0.005    1.721    1.772
+ cp_dbcsr_plus_fm_fm_t_native         6  7.0    0.000    0.000    1.689    1.743
+ init_scf_run                         1  3.0    0.000    0.000    1.718    1.725
+ dbcsr_multiply_generic               7  8.1    0.003    0.003    1.664    1.717
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 1
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2022-02-03 17:19:14.384
+ ***** ** ***  *** **   PROGRAM RAN ON            cpn-p27-15.compute.cbls.ccr.bu
+ **    ****   ******    PROGRAM RAN BY                                  mshakiba
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 15999
+  **** **  *******  **  PROGRAM STOPPED IN /projects/academic/alexeyak/mohammad/
+                                           projects/1_project_xtb/pdos/Si501H228

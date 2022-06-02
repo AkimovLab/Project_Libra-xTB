@@ -7,8 +7,8 @@ run_slurm = True
 submit_template = 'submit_template.slm'
 run_python_file = 'run_template.py'
 istep = 900
-fstep = 3999
-njobs = 30
+fstep = 1000#3999
+njobs = 10
 
 # Removing the previous folders if existed. You can keep them as well 
 # but Libra will overwrite some of the data if their names are the same

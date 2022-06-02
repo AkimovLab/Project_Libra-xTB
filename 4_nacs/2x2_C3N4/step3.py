@@ -12,7 +12,7 @@ params_ks = {
           'logfile_directory': os.getcwd()+'/../../3_overlaps/2x2_C3N4/all_logfiles',
           'path_to_save_ks_Hvibs': os.getcwd()+'/res-ks',
           'path_to_save_sd_Hvibs': os.getcwd()+'/res-ks',
-          'start_time': 900, 'finish_time': 3999,
+          'start_time': 1000, 'finish_time': 1099,
           'apply_phase_correction': True, 'apply_orthonormalization': True,
           'do_state_reordering': 2, 'state_reordering_alpha':0
          }
@@ -31,7 +31,7 @@ params_sd = {
           'logfile_directory': os.getcwd()+'/../../3_overlaps/2x2_C3N4/all_logfiles',
           'path_to_save_sd_Hvibs': os.getcwd()+'/res-mixed-basis-energy',
           'outdir': os.getcwd()+'/res-mixed-basis-energy',
-          'start_time': 900, 'finish_time': 3999, 'sorting_type': 'energy',
+          'start_time': 1000, 'finish_time': 1099, 'sorting_type': 'energy',
           'apply_phase_correction': True, 'apply_orthonormalization': True,
           'do_state_reordering': 2, 'state_reordering_alpha':0
          }
@@ -50,7 +50,7 @@ params_sd = {
           'logfile_directory': os.getcwd()+'/../../3_overlaps/2x2_C3N4/all_logfiles',
           'path_to_save_sd_Hvibs': os.getcwd()+'/res-mixed-basis-identity',
           'outdir': os.getcwd()+'/res-mixed-basis-identity',
-          'start_time': 900, 'finish_time': 3999, 'sorting_type': 'identity',
+          'start_time': 1000, 'finish_time': 1099, 'sorting_type': 'identity',
           'apply_phase_correction': True, 'apply_orthonormalization': True,
           'do_state_reordering': 2, 'state_reordering_alpha':0
          }

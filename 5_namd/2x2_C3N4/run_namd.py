@@ -149,8 +149,8 @@ params = {}
 #================== The algorithm for readin all at one and then use them for repetition
 
 ### load all the data from istep to fstep
-istep = 900
-fstep = 3996
+istep = 1000
+fstep = 3999
 # We can loop over the initial geometries but the high-throughput computation is better to be parallalized over the initial geometries
 # The distribution of the jobs and parallalization will be done in the bash script (We can make it Pythonic as well the same as step2)
 igeo = 0

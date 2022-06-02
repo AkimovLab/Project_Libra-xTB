@@ -82,18 +82,44 @@ def compute_model_nbra(q, params, full_id):
     #=========== Basis transform, if available =====
     basis_transform = CMATRIX(nadi, nadi)            
     basis_transform.identity()
-                                        
+    #========= Read data of step timestep ========
+    ###step = params["istep"]+timestep
+    ###path_to_npz_files = params["path_to_npz_files"]
+    ###active_space = params["active_space"]
+    ###hvib_re = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{step}_re.npz').todense()[active_space,:][:,active_space].real)
+    ###hvib_re_MATRIX = data_conv.nparray2MATRIX(hvib_re)
+    ###hvib_im = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{step}_im.npz').todense()[active_space,:][:,active_space].real)
+    ###hvib_im_MATRIX = data_conv.nparray2MATRIX(hvib_im)
+    ####HVIB_CI.append( CMATRIX(hvib_re_MATRIX, hvib_im_MATRIX) )
+    ###St_re = np.array(sp.load_npz(F'{path_to_npz_files}/St_sd_{step}_re.npz').todense()[active_space,:][:,active_space].real)
+    ###St_re_MATRIX = data_conv.nparray2MATRIX(St_re)
+
+    ###zero = MATRIX(hvib_re.shape[0], hvib_re.shape[1])
+
+    #HAM_CI.append( CMATRIX(hvib_re_MATRIX, zero) )
+    #NAC_CI.append( CMATRIX(zero, -1.0 * hvib_im_MATRIX) )
+    #ST_CI.append( CMATRIX(St_re_MATRIX, zero) )
     #========= Time-overlap matrices ===================
     #filename_re =  F"res_mb_sp/St_ci_{x}_re"
     #filename_im =  F"res_mb_sp/St_ci_{x}_im"
     #time_overlap_adi = data_read.get_matrix(nadi, nadi, filename_re, filename_im, list(range(nadi)), 1, 1)
-                
+    #icond = params["icond"]
+    #index = timestep+icond
+    #nfiles = params["nfiles"]
+    #while index>=nfiles:
+    #    index -= nfiles
     obj = tmp()
+    #obj.ham_adi = CMATRIX(hvib_re_MATRIX, zero) #HAM_CI[timestep]
+    #obj.nac_ci = CMATRIX(zero, -1.0 * hvib_im_MATRIX) #NAC_CI[timestep]
+    #obj.hvib_adi =  CMATRIX(hvib_re_MATRIX, hvib_im_MATRIX) #HVIB_CI[timestep] #hvib_adi
+    #obj.basis_transform = basis_transform
+    #obj.time_overlap_adi = CMATRIX(St_re_MATRIX, zero) #ST_CI[timestep] #time_overlap_adi
     obj.ham_adi = HAM_CI[timestep]
     obj.nac_ci = NAC_CI[timestep]
-    obj.hvib_adi = HVIB_CI[timestep] #hvib_adi
+    obj.hvib_adi =  HVIB_CI[timestep] #hvib_adi
     obj.basis_transform = basis_transform
     obj.time_overlap_adi = ST_CI[timestep] #time_overlap_adi
+
     
     return obj
 
@@ -152,168 +178,206 @@ def run_tsh(common_params, model_params, prefix):
 #================== READ IN THE DATA ===============
 
 params = {}
+# Loop over inital geometries
+#================== The algorithm for readin all at one and then use them for repetition
 
-t1 = time.time()
-istep = 2500
-fstep = 4501
+### load all the data from istep to fstep
+istep = 2000
+fstep = 5999
+# We can loop over the initial geometries but the high-throughput computation is better to be parallalized over the initial geometries
+# The distribution of the jobs and parallalization will be done in the bash script (We can make it Pythonic as well the same as step2)
+igeo = 0
+nfiles = fstep-istep
+path_to_npz_files = '../../4_nacs/Si265H140/res-mixed-basis'
+params["path_to_npz_files"] = path_to_npz_files
+#path_to_npz_files = '../step3/res-mixed-basis'
 active_space = list(range(160))
-path_to_npz_files = '../../4_nacs/Si265H140/res-electron-only'
+# initial geometries for all the loaded files
+# If you set a value large than nfiles the code will automatically consider 
+# the periodic calculations and will reuse the data from istep to fstep
+user_nsteps = fstep-istep #1998
+# Maybe we do not need this flag for now since we do not use it but let's keep it if we needed it
+periodic_dynamics = False
+params["periodic_dynamics"] = periodic_dynamics
+params["nfiles"] = nfiles
+params["istep"] = istep
+params["fstep"] = fstep
+params["active_space"] = active_space
 HVIB_CI = []
 HAM_CI = []
 NAC_CI = []
 ST_CI = []
+# Loop over all the step starting from geometry icond
 for i in range(istep,fstep):
-    print('step',i)
-    hvib_re = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_re.npz').todense().real[active_space,:][:,active_space])
+    print('Reading data of step',i)
+    hvib_re = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_re.npz').todense()[active_space,:][:,active_space].real)
     hvib_re_MATRIX = data_conv.nparray2MATRIX(hvib_re)
-    hvib_im = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_im.npz').todense().real[active_space,:][:,active_space])
-    hvib_im_MATRIX = data_conv.nparray2MATRIX(hvib_im)
+    hvib_im1 = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_im.npz').todense()[active_space,:][:,active_space].real)
+    hvib_im = np.zeros(hvib_im1.shape)
+#    for iii in range(hvib_im1.shape[0]):
+#        try:
+#            hvib_im[iii,iii]    = hvib_im1[iii,iii]
+#            hvib_im[iii,iii+1]  = hvib_im1[iii,iii+1]
+#            hvib_im[iii+1,iii]  = hvib_im1[iii+1,iii]
+#        except:
+#            pass
+    hvib_im1[0,:] *= np.sqrt(2)
+    hvib_im1[:,0] *= np.sqrt(2)
+    hvib_im_MATRIX = data_conv.nparray2MATRIX(hvib_im1)
     HVIB_CI.append( CMATRIX(hvib_re_MATRIX, hvib_im_MATRIX) )
-    St_re = np.array(sp.load_npz(F'{path_to_npz_files}/St_sd_{i}_re.npz').todense().real[active_space,:][:,active_space])
+    St_re = np.array(sp.load_npz(F'{path_to_npz_files}/St_sd_{i}_re.npz').todense()[active_space,:][:,active_space].real)
     St_re_MATRIX = data_conv.nparray2MATRIX(St_re)
     if i==istep:
         zero = MATRIX(hvib_re.shape[0], hvib_re.shape[1])
     HAM_CI.append( CMATRIX(hvib_re_MATRIX, zero) )
     NAC_CI.append( CMATRIX(zero, -1.0 * hvib_im_MATRIX) )
     ST_CI.append( CMATRIX(St_re_MATRIX, zero) )
-nstates = sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_im.npz')[active_space,:][:,active_space].shape[0]
-
-#================== COMPUTE DEPHASING AND ENERGY GAPS  ===============
-
-params["init_times"] = [0]
-params["nsteps"] = 2000
-# Compute energy gaps and decoherence times over part of the trajectory we want
-tau, rates = decoherence_times.decoherence_times_ave([HVIB_CI], [params["init_times"][0]], params["nsteps"], 0)
-dE         = decoherence_times.energy_gaps_ave(      [HVIB_CI], [params["init_times"][0]], params["nsteps"])
-avg_deco   = tau/units.fs2au
-
-avg_deco = data_conv.MATRIX2nparray(avg_deco)
-for i in range(len(avg_deco)):
-    avg_deco[i][i] = 0
-np.savetxt('avg_deco',avg_deco.real)
-
-dE = get_avegage_energies([HVIB_CI])
-
-print("Average energies above the GS are")
-for indx, de in enumerate(dE):
-    print(F"State {indx} energy {de * units.au2ev} eV")
-
-nst = len(dE)
-gaps = MATRIX(nst, nst)
-for istate1 in range(nst):
-    for istate2 in range(nst):        
-        gaps.set(istate1, istate2,  math.fabs(dE[istate1] - dE[istate2]) )
-
-
-
-
-
-#================== SET UP THE DYNAMICS AND DISTRIBUTED COMPUTING SCHEME  ===============
-params_nbra = { "nsteps": 2000, "dt":0.5*units.fs2au, 
-                "ntraj": 100, "x0":[-4.0], "p0":[4.0], "masses":[2000.0], "k":[0.01],                  
-                "nstates": nstates, "istate":[1, 1],
-                "which_adi_states":range(11), "which_dia_states":range(11),
-                "rep_ham":1, "tsh_method":0, 
-                "force_method":0, "nac_update_method":0,
-                "hop_acceptance_algo":31, "momenta_rescaling_algo":0,
-                "time_overlap_method":1,
-                "mem_output_level":-1,
-                "txt_output_level":3,
-                "properties_to_save": ['timestep', 'time', 'SH_pop', 'SH_pop_raw'],
-                "state_tracking_algo":2, "convergence":0,  "max_number_attempts":100, 
-                "min_probability_reordering":0.01,  
-                "decoherence_algo":0,
-                "decoherence_rates":rates,
-                "ave_gaps":gaps
-              }
-model_params_nbra = {"model":2, "nstates":nstates, "filename":None }
-
-#run_tsh(params_nbra, model_params_nbra, "nbra_fssh")
-
-
-
-nthreads = 12
-params_nbra["Temperature"]   = 300.0
-params_nbra["ntraj"]         = 100
-methods = {0:"FSSH", 1:"IDA", 2:"mSDM", 3:"DISH", 21:"mSDM2", 31:"DISH2" }
-
-init_states = [120,121,122,123] 
-tsh_methods = [0, 1, 2, 3] #, 21, 31]
-batches = [0,1,2,3,4,5] 
-
-rnd = Random()
-
-var_pool = []
-for istate in init_states:  # initial states   
-    for method in tsh_methods:  # decoherence method: FSSH, IDA, mSDM, DISH        
-        for batch in batches:        
-            wait = rnd.uniform(0.0, 25.0)
-            var_pool.append( (istate, method, batch, wait) )
-
-
-
-prefix = "namd_res"
-os.system(F'mkdir {prefix}')
-os.system(F"cp run_namd.py {prefix}/run_namd_params")
-
-
-def run_dynamics( istate, method, batch, wait_time ):
-
-    prms = dict(params_nbra)
-
-    prms["istate"]    = [1, istate] # Recall index from 0
-
-    if method==0:  # FSSH
-        prms["tsh_method"] = 0 # FSSH
-        prms["decoherence_algo"] = -1  # no decoherence
-        prms["dephasing_informed"] = 0
-
-    elif method==1:  # IDA
-        prms["tsh_method"] = 0 # FSSH
-        prms["decoherence_algo"] = 1  # ID
-        prms["dephasing_informed"] = 0
-
-    elif method==2:  # mSDM
-        prms["tsh_method"] = 0 # FSSH
-        prms["decoherence_algo"] = 0  # mSDM
-        prms["dephasing_informed"] = 0
-
-    elif method==3:  # DISH
-        prms["tsh_method"] = 3 # DISH
-        prms["decoherence_algo"] = -1  # no other decoherence
-        prms["dephasing_informed"] = 0
-
-    elif method==21:  # mSDM
-        prms["tsh_method"] = 0 # FSSH
-        prms["decoherence_algo"] = 0  # mSDM
-        prms["dephasing_informed"] = 1
-
-    elif method==31:  # DISH
-        prms["tsh_method"] = 3 # DISH
-        prms["decoherence_algo"] = -1  # no other decoherence
-        prms["dephasing_informed"] = 1
-
-
-    name = methods[method]   
-    time.sleep( int(wait_time) )
-
-    run_tsh(prms, model_params_nbra, F"{prefix}/start_s{istate}_{name}_batch{batch}" )
-    #step4.run(hvib, prms)
-
-
-
-#================== DO THE CALCULATIONS  ===============
-                        
-t1 = time.time()
-
-pool = mp.Pool( nthreads )
-pool.starmap( run_dynamics, var_pool )
-pool.close()
-pool.join()
-
-t2 = time.time()
-
-print(F"Total time {t2 - t1}")
-
-
-
+nstates = sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{i}_im.npz').todense()[active_space,:][:,active_space].shape[0]
+# for icond in range(igeo,fgeo):
+for icond in [igeo]:
+    print(F'Flag icond {icond}')
+    #sys.exit(0)
+    params["icond"] = icond
+    
+    n_steps = nfiles #fstep-istep
+    tau, rates = decoherence_times.decoherence_times_ave([HAM_CI], [0], n_steps, 0)
+    dE         = decoherence_times.energy_gaps_ave(      [HAM_CI], [0], n_steps)
+    avg_deco   = tau * units.au2fs
+    avg_deco = data_conv.MATRIX2nparray(avg_deco)
+    for i in range(len(avg_deco)):
+        avg_deco[i][i] = 0
+    np.savetxt(F'avg_deco_{icond}',avg_deco.real)
+    
+   
+    
+    #================== COMPUTE DEPHASING AND ENERGY GAPS  ===============
+    
+    params["init_times"] = [0]
+    params["nsteps"] = fstep-istep
+    
+    dE = get_avegage_energies([HVIB_CI])
+    
+    print("Average energies above the GS are")
+    for indx, de in enumerate(dE):
+        print(F"State {indx} energy {de * units.au2ev} eV")
+    
+    
+    nst = len(dE)
+    gaps = MATRIX(nst, nst)
+    for istate1 in range(nst):
+        for istate2 in range(nst):        
+            gaps.set(istate1, istate2,  math.fabs(dE[istate1] - dE[istate2]) )
+    
+    #del HVIB_CI, HAM_CI, NAC_CI, ST_CI 
+    
+    
+    #================== SET UP THE DYNAMICS AND DISTRIBUTED COMPUTING SCHEME  ===============
+    params_nbra = { "nsteps": user_nsteps, "dt":0.5*units.fs2au, 
+                    "ntraj": 1000, "x0":[-4.0], "p0":[4.0], "masses":[2000.0], "k":[0.01],                  
+                    "nstates": nstates, "istate":[1, 1],
+                    "which_adi_states":range(11), "which_dia_states":range(11),
+                    "rep_ham":1, "tsh_method":0, 
+                    "force_method":0, "nac_update_method":0,
+                    "hop_acceptance_algo":31, "momenta_rescaling_algo":0,
+                    "time_overlap_method":1,
+                    "mem_output_level":-1,
+                    "txt_output_level":3,
+                    "properties_to_save": ['timestep', 'time', 'SH_pop', 'SH_pop_raw'],
+                    "state_tracking_algo":2, "convergence":0,  "max_number_attempts":100, 
+                    "min_probability_reordering":0.01,  
+                    "decoherence_algo":0,
+                    "decoherence_rates":rates,
+                    "ave_gaps":gaps, 'isNBRA': 1, 'decoherence_times_type': 0, 'icond': icond, 'nfiles': nfiles
+                  }
+    model_params_nbra = {"model":2, "nstates":nstates, "filename":None }
+    
+    nthreads = 12
+    params_nbra["Temperature"]   = 300.0
+    params_nbra["ntraj"]         = 100
+    methods = {0:"FSSH", 1:"IDA", 2:"mSDM", 3:"DISH", 21:"mSDM2", 31:"DISH2" }
+    
+    init_states = [120,121,122,123]
+    tsh_methods = [0, 1, 2] #, 3] #, 21, 31]
+    batches = range(6)
+    
+    rnd = Random()
+    
+    var_pool = []
+    for istate in init_states:  # initial states   
+        for method in tsh_methods:  # decoherence method: FSSH, IDA, mSDM, DISH        
+            for batch in batches:        
+                wait = rnd.uniform(0.0, 25.0)
+                var_pool.append( (istate, method, batch, wait) )
+    
+    
+    
+    prefix = F"namd_res_{icond}"
+    os.system(F'mkdir {prefix}')
+    os.system(F"cp run_namd.py {prefix}/run_namd_params")
+    
+    
+    def run_dynamics( istate, method, batch, wait_time ):
+    
+        prms = dict(params_nbra)
+    
+        prms["istate"]    = [1, istate] # Recall index from 0
+    
+        if method==0:  # FSSH
+            prms["tsh_method"] = 0 # FSSH
+            prms["decoherence_algo"] = -1  # no decoherence
+            prms["dephasing_informed"] = 0
+    
+        elif method==1:  # IDA
+            prms["tsh_method"] = 0 # FSSH
+            prms["decoherence_algo"] = 1  # ID
+            prms["dephasing_informed"] = 0
+    
+        elif method==2:  # mSDM
+            prms["tsh_method"] = 0 # FSSH
+            prms["decoherence_algo"] = 0  # mSDM
+            prms["dephasing_informed"] = 0
+    
+        elif method==3:  # DISH
+            prms["tsh_method"] = 3 # DISH
+            prms["decoherence_algo"] = -1  # no other decoherence
+            prms["dephasing_informed"] = 0
+    
+        elif method==21:  # mSDM
+            prms["tsh_method"] = 0 # FSSH
+            prms["decoherence_algo"] = 0  # mSDM
+            prms["dephasing_informed"] = 1
+    
+        elif method==31:  # DISH
+            prms["tsh_method"] = 3 # DISH
+            prms["decoherence_algo"] = -1  # no other decoherence
+            prms["dephasing_informed"] = 1
+    
+    
+        name = methods[method]   
+        time.sleep( int(wait_time) )
+    
+        run_tsh(prms, model_params_nbra, F"{prefix}/start_s{istate}_{name}_batch{batch}" )
+    
+    
+    
+    #================== DO THE CALCULATIONS  ===============
+                            
+    t1 = time.time()
+    ###k = 0
+    ###for var in var_pool:
+    ###    k += 1 
+    ###    t3 = time.time()
+    ###    print(F'#############################Started calcuations for run {k}#############################')
+    ###    run_dynamics(var[0], var[1], var[2], var[3])
+    ###    print(F'#############################Done with calculations for run {k}. Elapsed time: {time.time()-t3}#############################')
+    pool = mp.Pool( nthreads )
+    pool.starmap( run_dynamics, var_pool )
+    pool.close()
+    pool.join()
+    
+    t2 = time.time()
+    
+    print(F"Total time {t2 - t1}")
+    
+    
+    

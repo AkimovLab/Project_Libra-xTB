@@ -23,5 +23,5 @@ echo "working directory="$SLURM_SUBMIT_DIR
 #module load intel-mpi/2020.2
 #module load cp2k
 
-python run_namd_1000.py
+python run_namd_80.py
 

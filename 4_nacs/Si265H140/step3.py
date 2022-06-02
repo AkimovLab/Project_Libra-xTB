@@ -14,7 +14,7 @@ params = {
           'path_to_save_sd_Hvibs': os.getcwd()+'/res-sd',
           'start_time': 2000, 'finish_time': 5999,
           'apply_phase_correction': True, 'apply_orthonormalization': True,
-          'do_state_reordering': 2, 'state_reordering_alpha':0
+          'do_state_reordering': 0, 'state_reordering_alpha':0
          }
 
 #### For KS states - Applying correction to KS overlaps and computing the NACs in KS space
@@ -29,11 +29,11 @@ params = {
           'is_many_body': False, 'time_step': 1.0, 'es_software': 'cp2k',
           'path_to_npz_files': os.getcwd()+'/../../3_overlaps/Si265H140/res',
           'logfile_directory': os.getcwd()+'/../../3_overlaps/Si265H140/all_logfiles',
-          'path_to_save_sd_Hvibs': os.getcwd()+'/res-mixed-basis',
-          'outdir': os.getcwd()+'/res-mixed-basis',
+          'path_to_save_sd_Hvibs': os.getcwd()+'/res-electron-only',
+          'outdir': os.getcwd()+'/res-electron-only',
           'start_time': 2000, 'finish_time': 5999, 'sorting_type': 'energy',
           'apply_phase_correction': True, 'apply_orthonormalization': True,
-          'do_state_reordering': 2, 'state_reordering_alpha':0
+          'do_state_reordering': 0, 'state_reordering_alpha':0
          }
 
 

@@ -58,6 +58,37 @@ After setting up your input, you can submit the jobs through slurm for multiple 
 The results will be stored for each initial geometry in `namd_res_*` folders for each initial state, scheme, and batch.
 
 
+Note that you can apply changes to the Hamiltonian files when reading them. For example, in order to perform the electron-hole recombination dynamics in the spin adapted configuration basis (SAC), you need to multiply the NAC values by `sqrt(2)` which can be done using:
+
+```
+hvib_im[:,0] *= np.sqrt(2)
+hvib_im[0,:] *= np.sqrt(2)
+```
+
+or in Si NCs, you can compute the dynamics by allowing only adjacent states transitions using:
+
+```
+# First make a new matrix with the same dimension as the original matrix, hvib_im1
+hvib_im = np.zeros(hvib_im1.shape)
+for k1 in range(hvib_im1.shape[0]):
+    try:
+        # only appending the first off-diagonals in the matrix
+        hvib_im[k1,k1]    = hvib_im1[k1,k1]
+        hvib_im[k1,k1+1]  = hvib_im1[k1,k1+1]
+        hvib_im[k1+1,k1]  = hvib_im1[k1+1,k1]
+    except:
+        pass
+# Append hvib_im
+hvib_im_MATRIX = data_conv.nparray2MATRIX(hvib_im)
+
+```
+
+## 5. Visualizing
+
+The Python files in folder `6_plot_properties` are a set of diverse files that are used for analyzing and plotting the properties of the generated data from previous steps. We highly recommend to run the `.py` files in `6_plot_properties` folder in Jupyter notebooks. The reason is that the user can better understand the procedure of how the data are found, analyzed, and plotted. The `namd_results.py` files are for fitting the NA-MD results and `prop.py` files are for plotting the electronic structure poperties (such as PDOS and energy vs time plots) and NAC maps in different basis. The user can modify these scripts as desired. One of the most important libraries that we use is `glob` which can be used to find files with specific names. For example, finding the imaginary part of the Hamiltonians, one can use `glob.glob('res-ks/*im*')` and use the found files for plotting the average NAC maps. 
+
+
+Other files are used for analyzing the PDOS and movement of the core and surface atoms in Si NCs. The coordinates of the core and surface atoms are provided in `6_plot_properties/Si_NCs` folder.
 
 
 

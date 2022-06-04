@@ -29,7 +29,7 @@ About the method:
     - 3: Fitting the recovery population dynamics vs time.
 """
 # Fit energy vs time data
-method = 1 
+method = 2 
 for c, folder_name in enumerate(folder_names):
     for scheme in schemes:
         title = titles[c]

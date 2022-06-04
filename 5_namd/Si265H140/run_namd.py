@@ -68,52 +68,13 @@ def compute_model_nbra(q, params, full_id):
     Id = Cpp2Py(full_id)
     indx = Id[-1]    
     timestep = params["timestep"]    
-    #filename = params["filename"]
     nadi = params["nstates"]
     
-    #x = 5000 + timestep
-    
-                            
-    #============ Vibronic Hamiltonian ===========        
-    #filename_re =  F"res_mb_sp/Hvib_ci_{x}_re"
-    #filename_im =  F"res_mb_sp/Hvib_ci_{x}_im"
-    #hvib_adi = data_read.get_matrix(nadi, nadi, filename_re, filename_im, list(range(nadi)), 1, 1)
 
     #=========== Basis transform, if available =====
     basis_transform = CMATRIX(nadi, nadi)            
     basis_transform.identity()
-    #========= Read data of step timestep ========
-    ###step = params["istep"]+timestep
-    ###path_to_npz_files = params["path_to_npz_files"]
-    ###active_space = params["active_space"]
-    ###hvib_re = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{step}_re.npz').todense()[active_space,:][:,active_space].real)
-    ###hvib_re_MATRIX = data_conv.nparray2MATRIX(hvib_re)
-    ###hvib_im = np.array(sp.load_npz(F'{path_to_npz_files}/Hvib_sd_{step}_im.npz').todense()[active_space,:][:,active_space].real)
-    ###hvib_im_MATRIX = data_conv.nparray2MATRIX(hvib_im)
-    ####HVIB_CI.append( CMATRIX(hvib_re_MATRIX, hvib_im_MATRIX) )
-    ###St_re = np.array(sp.load_npz(F'{path_to_npz_files}/St_sd_{step}_re.npz').todense()[active_space,:][:,active_space].real)
-    ###St_re_MATRIX = data_conv.nparray2MATRIX(St_re)
-
-    ###zero = MATRIX(hvib_re.shape[0], hvib_re.shape[1])
-
-    #HAM_CI.append( CMATRIX(hvib_re_MATRIX, zero) )
-    #NAC_CI.append( CMATRIX(zero, -1.0 * hvib_im_MATRIX) )
-    #ST_CI.append( CMATRIX(St_re_MATRIX, zero) )
-    #========= Time-overlap matrices ===================
-    #filename_re =  F"res_mb_sp/St_ci_{x}_re"
-    #filename_im =  F"res_mb_sp/St_ci_{x}_im"
-    #time_overlap_adi = data_read.get_matrix(nadi, nadi, filename_re, filename_im, list(range(nadi)), 1, 1)
-    #icond = params["icond"]
-    #index = timestep+icond
-    #nfiles = params["nfiles"]
-    #while index>=nfiles:
-    #    index -= nfiles
     obj = tmp()
-    #obj.ham_adi = CMATRIX(hvib_re_MATRIX, zero) #HAM_CI[timestep]
-    #obj.nac_ci = CMATRIX(zero, -1.0 * hvib_im_MATRIX) #NAC_CI[timestep]
-    #obj.hvib_adi =  CMATRIX(hvib_re_MATRIX, hvib_im_MATRIX) #HVIB_CI[timestep] #hvib_adi
-    #obj.basis_transform = basis_transform
-    #obj.time_overlap_adi = CMATRIX(St_re_MATRIX, zero) #ST_CI[timestep] #time_overlap_adi
     obj.ham_adi = HAM_CI[timestep]
     obj.nac_ci = NAC_CI[timestep]
     obj.hvib_adi =  HVIB_CI[timestep] #hvib_adi
@@ -188,7 +149,7 @@ fstep = 5999
 # The distribution of the jobs and parallalization will be done in the bash script (We can make it Pythonic as well the same as step2)
 igeo = 0
 nfiles = fstep-istep
-path_to_npz_files = '../../4_nacs/Si265H140/res-mixed-basis'
+path_to_npz_files = '../../4_nacs/Si265H140/res-electron-only'
 params["path_to_npz_files"] = path_to_npz_files
 #path_to_npz_files = '../step3/res-mixed-basis'
 active_space = list(range(160))

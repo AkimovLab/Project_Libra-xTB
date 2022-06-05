@@ -11,7 +11,7 @@ from libra_py import units, data_stat, data_io
 
 
 # Generate the energies
-energy_files = glob.glob('res-mixed-basis/Hvib_sd*re*')
+energy_files = glob.glob('../4_nacs/2x2_C3N4/res-mixed-basis/Hvib_sd*re*')
 energy_files = data_io.sort_hvib_file_names(energy_files)
 # print('Sorted energy files are:', energy_files)
 dt = 1.0 # fs
@@ -40,13 +40,13 @@ plt.xlim(0,100)
 plt.xticks(fontsize=10)
 plt.yticks(fontsize=10)
 plt.tight_layout()
-plt.savefig('../E_vs_Time.jpg', dpi=600)
+plt.savefig('E_vs_Time.jpg', dpi=600)
 
 np.savetxt('ene_ave', np.average(energies, axis=0))
 # In[6]:
 
 # Plot NAC map
-nac_files = glob.glob('res-mixed-basis/Hvib_sd*im*')
+nac_files = glob.glob('../4_nacs/2x2_C3N4/res-mixed-basis/Hvib_sd*im*')
 for c, nac_file in enumerate(nac_files):
     nac_mat = sp.load_npz(nac_file).todense().real
     if c==0:
@@ -67,12 +67,12 @@ plt.ylabel('State index', fontsize=10)
 plt.colorbar().ax.set_title('meV', fontsize=8)
 plt.title('C$_3$N$_4$ - Mixed basis', fontsize=10)
 plt.tight_layout()
-plt.savefig('../c3n4_mixed_basis_nac_map.jpg', dpi=600)
+plt.savefig('c3n4_mixed_basis_nac_map.jpg', dpi=600)
 np.savetxt('nac_ave_sd', nac_ave)
 
 # In[10]:
 
-nac_files = glob.glob('res-ks/Hvib_ks*im*')
+nac_files = glob.glob('../4_nacs/2x2_C3N4/res-ks/Hvib_ks*im*')
 for c, nac_file in enumerate(nac_files):
     nac_mat = sp.load_npz(nac_file).todense().real
     if c==0:
@@ -91,7 +91,7 @@ plt.imshow(np.flipud(nac_ave), cmap='hot', extent=(0,nstates,0,nstates))#, vmin=
 plt.xlabel('State index', fontsize=10)
 plt.ylabel('State index', fontsize=10)
 plt.colorbar().ax.set_title('meV', fontsize=8)
-plt.title('C$_3$N$_4$-KS', fontsize=10)
+plt.title('C$_3$N$_4$ - KS', fontsize=10)
 plt.tight_layout()
 plt.savefig('c3n4_ks_basis_nac_map.jpg', dpi=600)
 np.savetxt('nac_ave_ks', nac_ave)
@@ -121,8 +121,8 @@ def gaussian_function_vector(a_vec, mu_vec, sigma, num_points, x_min, x_max):
 #sys.exit(0)
 #get_ipython().run_line_magic('matplotlib', 'notebook')
 plt.figure(figsize=(3.21, 2.41), dpi=600, edgecolor='black', frameon=True)
-path_to_all_pdos = os.getcwd()+'/../step2/all_pdosfiles'
-atoms = ['C', 'N']
+path_to_all_pdos = '../3_overlaps/2x2_C3N4/all_pdosfiles'
+atoms = ['C','N']
 orbitals_cols = [[3], range(4,7), range(7,12), range(12,19)]
 orbitals = ['s','p','d','f']
 npoints = 3000
@@ -173,7 +173,7 @@ plt.xlabel('Energy, eV', fontsize=10)
 plt.title('C$_3$N$_4$, 300 K', fontsize=10)
 plt.tight_layout()
 #plt.savefig('../C3N4_pdos.jpg', dpi=600)
-plt.savefig('../C3N4_pdos_1.jpg', dpi=600)
+plt.savefig('c3n4_pdos_1.jpg', dpi=600)
 
 
 

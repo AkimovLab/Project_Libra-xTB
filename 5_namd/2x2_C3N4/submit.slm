@@ -5,11 +5,12 @@
 ##SBATCH --clusters=ub-hpc
 ##SBATCH --partition=scavenger  --qos=scavenger
 ##SBATCH --clusters=faculty
-#SBATCH --time=300:00:00
+#SBATCH --time=120:00:00
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=12
+#SBATCH --ntasks-per-node=6
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=128000
+##SBATCH --mem-per-cpu=15000
+#SBATCH --mem=64000
 ###SBATCH --mail-user=mshakiba@buffalo.edu
 echo "SLURM_JOBID="$SLURM_JOBID
 echo "SLURM_JOB_NODELIST="$SLURM_JOB_NODELIST
@@ -22,5 +23,5 @@ echo "working directory="$SLURM_SUBMIT_DIR
 #module load intel-mpi/2020.2
 #module load cp2k
 
-python run_name.py
+python run_namd_100.py
 
